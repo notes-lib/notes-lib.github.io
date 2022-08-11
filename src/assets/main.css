@@ -1,0 +1,29 @@
+/* based on nord theme */
+@import url(//fonts.googleapis.com/css?family=Inter);
+
+:root {
+    --background: #242933;
+    --surface: #2e3440;
+    --accent: #88c0d0;
+    --text: #eceff4;
+    font-family: 'Inter', sans-serif;
+}
+
+:root.light-theme {
+    --background: #eceff4;
+    --surface: #e5e9f0;
+    --accent: #88c0d0;
+    --text: #4c566a;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+* { margin: 0; padding: 0; }
+
+img {
+    fill: red;
+}
