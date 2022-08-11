@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <img src="src/assets/tagImages/art.jpg" alt="chemistry">
+        <img src="/src/assets/tagImages/art.jpg" alt="chemistry">
         <div class="section">
             <h3>Random Reactions</h3>
             <div class="author">
