@@ -4,7 +4,7 @@ const props = defineProps({
   id: Number,
 });
 
-let image = "/src/assets/tagImages/" + props.tag + ".jpg";
+let image = "@/assets/tagImages/" + props.tag + ".jpg";
 console.log(image);
 </script>
 
