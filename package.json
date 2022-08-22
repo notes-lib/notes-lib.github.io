@@ -5,13 +5,18 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json,vue}\""
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "floating-vue": "^2.0.0-beta.19",
+    "ink-mde": "^0.11.1",
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
-    "vue-i18n": "^9.2.0-beta.40",
-    "vue-router": "^4.1.2"
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.1.2",
+    "vue-spinner": "^1.0.4"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
@@ -19,7 +24,7 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^9.0.0",
-    "prettier": "^2.5.1",
+    "prettier": "^2.7.1",
     "vite": "^3.0.1"
   }
 }

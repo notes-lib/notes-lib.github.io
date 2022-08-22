@@ -1,28 +1,15 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Navbar from './components/Navbar.vue';
-import Welcome from './components/home/Welcome.vue';
-import NotePreviews from './components/home/NotePreviews.vue';
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-
-      <Navbar></Navbar>
-      <div class="width">
-        <Welcome></Welcome>
-        <note-previews></note-previews>
-      </div>
-    </div>
-  </header>
-
-  <RouterView />
+  <RouterView>
+  </RouterView>
 </template>
 
 <style scoped>
-  .width {
-    max-width: 55rem;
-    margin: auto;
-  }
+.width {
+  max-width: 55rem;
+  margin: auto;
+}
 </style>
