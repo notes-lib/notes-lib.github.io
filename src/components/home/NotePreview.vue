@@ -4,7 +4,7 @@ const props = defineProps({
   id: Number,
 });
 
-const image = new URL("/src/assets/tagImages/" + props.tag + ".jpg", import.meta.url).href
+const image = "/tagImages/" + props.tag + ".jpg";
 </script>
 
 <template>
