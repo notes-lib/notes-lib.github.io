@@ -4,13 +4,12 @@ const props = defineProps({
   id: Number,
 });
 
-let image = "@/assets/tagImages/" + props.tag + ".jpg";
-console.log(image);
+const image = new URL("/src/assets/tagImages/" + props.tag + ".jpg", import.meta.url).href
 </script>
 
 <template>
   <div class="main">
-    <img :src="image" alt="tag" />
+    <img :src="image" :alt="props.tag" />
     <div class="section">
       <h3><slot name="title"></slot></h3>
       <div class="author">
