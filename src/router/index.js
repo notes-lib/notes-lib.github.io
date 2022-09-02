@@ -5,6 +5,7 @@ import Note from '@/components/Note.vue';
 
 const router = createRouter({
   history: createWebHistory('/'),
+  mode: 'hash',
   routes: [
     {
       path: '/',
