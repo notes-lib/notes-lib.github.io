@@ -9,8 +9,8 @@ import router from "./router";
 import "./assets/main.css";
 import { messages } from "./assets/messages.js";
 
-const i18n = new createI18n({
-  legacy: true,
+const t = new createI18n({
+  legacy: false,
   locale: "en",
   globalInjection: true,
   messages,
@@ -20,7 +20,7 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-app.use(i18n);
+app.use(t);
 app.use(FloatingVue, {
   themes: {
     "my-theme": {

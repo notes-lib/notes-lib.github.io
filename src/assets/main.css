@@ -15,10 +15,12 @@
     --text: #4c566a;
 }
 
-body {
+html, body {
     font-family: 'Inter', sans-serif;
     background-color: var(--background);
     color: var(--text);
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
 button {

@@ -9,7 +9,9 @@ const props = defineProps(['storageKey']);
 
 console.log(props.storageKey);
 
-const markdown = ref(localStorage.getItem(props.storageKey));
+const markdown = ref(localStorage.getItem(props.storageKey) ?? '');
+
+if (markdown.value === 'null') markdown.value = '';
 
 function close () {
   emit('submit', markdown.value);
@@ -119,21 +121,21 @@ const options = {
     --ink-code-font-family: 'Source Code Pro Medium', monospace;
   }
   
-  .editor >>> .cm-content {
+  .editor :deep(.cm-content) {
     caret-color: var(--text);
     flex-grow: 1;
   }
   
   
-  .editor >>> .cm-focused {
+  .editor :deep(.cm-focused) {
     outline: none;
   }
   
-  .editor >>> .ink-toolbar {
+  .editor :deep(.ink-toolbar) {
     justify-content: center;
   }
   
-  .editor >>> .cm-scroller {
+  .editor :deep(.cm-scroller) {
     min-height: 20rem;
   }
   

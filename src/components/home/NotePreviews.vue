@@ -118,7 +118,7 @@ console.log(filters);
     </div>
     <div class="notes">
       <div v-for="note in filters.filtered.value || []" :key="note['id']">
-        <note-preview :tag="note['tag']" :id="note['id']">
+        <note-preview @click="$router.push({name: 'Note', params: {id: note['id']}})" :tag="note['tag']" :id="note['id']">
           <template v-slot:title>
             {{ note["title"] }}
           </template>

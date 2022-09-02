@@ -1,0 +1,103 @@
+{
+  "name": "markdown-it-vue",
+  "version": "1.1.7",
+  "private": false,
+  "description": "The vue lib for markdown-it",
+  "author": {
+    "name": "ravenq",
+    "e-mail": "flw_dream@126.com"
+  },
+  "keywords": [
+    "markdown",
+    "markdown-it",
+    "markdown-it-plugin",
+    "vue",
+    "markdown-it-vue"
+  ],
+  "files": [
+    "dist",
+    "doc",
+    "src",
+    "types"
+  ],
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "dev": "vue-cli-service serve ./example/main.js",
+    "build": "npm run build:lib && npm run build:light && npm run build:example",
+    "lint": "vue-cli-service lint",
+    "build:example": "node --max_old_space_size=8192 node_modules/@vue/cli-service/bin/vue-cli-service.js build --dest example/dist ./example/main.js",
+    "build:lib": "node --max_old_space_size=8192 node_modules/@vue/cli-service/bin/vue-cli-service.js build --target lib ./src/index.js",
+    "build:light": "node --max_old_space_size=8192 node_modules/@vue/cli-service/bin/vue-cli-service.js build --target lib --name markdown-it-vue-light --no-clean ./src/index-light.js"
+  },
+  "main": "dist/markdown-it-vue.umd.min.js",
+  "dependencies": {
+    "echarts": "^5.1.0",
+    "flowchart.js": "^1.15.0",
+    "font-awesome-icon-chars": "^2.6.0",
+    "github-markdown-css": "^4.0.0",
+    "highlight.js": "^10.7.2",
+    "markdown-it": "^12.0.6",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-deflist": "^2.1.0",
+    "markdown-it-emoji": "^2.0.0",
+    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-github-toc": "^3.2.4",
+    "markdown-it-ins": "^3.0.1",
+    "@iktakahiro/markdown-it-katex": "^4.0.1",
+    "markdown-it-latex": "^0.2.0",
+    "markdown-it-mark": "^3.0.1",
+    "markdown-it-regex": "^0.2.0",
+    "markdown-it-source-map": "^0.1.1",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-toc-and-anchor": "^4.2.0",
+    "mermaid": "^8.9.2",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.12",
+    "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/cli-service": "^4.5.12",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.24.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "vue-cli-plugin-component-lib": "^0.1.6",
+    "vue-cli-plugin-webpack-bundle-analyzer": "^4.0.0",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "bugs": {
+    "url": "https://github.com/ravenq/markdown-it-vueissues"
+  },
+  "homepage": "https://github.com/ravenq/markdown-it-vue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravenq/markdown-it-vue.git"
+  }
+}
