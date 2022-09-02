@@ -4,7 +4,7 @@ import NewNote from '@/components/NewNote.vue';
 import Note from '@/components/Note.vue';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',
