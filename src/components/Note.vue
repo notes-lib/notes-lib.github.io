@@ -2,7 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Top from '@/components/note/Top.vue';
 import axios from "axios";
-import { ref } from "vue";
+import { ref, onMounted  } from "vue";
 import { url } from "@/assets/url.js";
 import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 import Content from '@/components/note/Content.vue';
@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 var data = ref({});
 var menu = ref(false);
+const commentsRef = ref(null);
 
 axios.post(url + 'readNote.php', {
 	id: route.params.id,
@@ -32,17 +33,12 @@ function readTime(str) {
 }
 
 function scrollComments() {
-	const comments = ref();
-	const el = comments;
-	// el.scrollIntoView({behavior: 'smooth'});
-	scrollTo(100, 0)
+	commentsRef.value.scrollIntoView();
 }
+
 </script>
 
 <template>
-<meta name="title" property="og:title" :content="data.title">
-<meta name="description" property="og:description" :content="data.content">
-
 <Navbar></Navbar>
 <div class="width">
     <div class="margin" v-if="Object.keys(data).length">
@@ -61,7 +57,7 @@ function scrollComments() {
 			@scrollComments = "scrollComments()"
 		></Top>
 		<Content class="content" :content="data.content" :sources="data.sources" :menu="menu"></Content>
-		<Comments ref="comments" :comments="data.comments" :id="data.id"></Comments>
+		<Comments ref="commentsRef" class="comments" :comments="data.comments" :id="data.id"></Comments>
     </div>
 	<div class="loading" v-if="!Object.keys(data).length">
 		<div class="inner">

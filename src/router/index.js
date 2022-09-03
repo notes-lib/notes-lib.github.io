@@ -10,11 +10,17 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        title: 'Notes Library',
+      },
     },
     {
       path: '/newNote',
       name: 'New note',
       component: NewNote,
+      meta: {
+        title: 'New - Notes Library',
+      },
     },
     {
       path: '/note/:id',

@@ -20,6 +20,7 @@
     "pinia": "^2.0.16",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.2",
+    "vue-page-title": "^2.0.5",
     "vue-router": "^4.1.2",
     "vue-spinner": "^1.0.4",
     "vue3-markdown-it": "^1.0.10"

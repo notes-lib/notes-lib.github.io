@@ -9,6 +9,7 @@ import IconComments from '@/components/icons/IconComments.vue';
 import IconTime from '@/components/icons/IconTime.vue';
 import IconDown from '@/components/icons/IconDown.vue';
 import IconMenuOpen from '@/components/icons/IconMenuOpen.vue';
+import { useTitle } from 'vue-page-title';
 
 const props = defineProps([
     'id',
@@ -22,6 +23,8 @@ const props = defineProps([
     'likes',
     'readTime',
 ]);
+
+useTitle(props.title);
 
 const emit = defineEmits(['toggleMenu', 'scrollComments']);
 
