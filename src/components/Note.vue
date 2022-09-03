@@ -30,9 +30,19 @@ axios.post(url + 'readNote.php', {
 function readTime(str) {
 	return Math.round(str.trim().split(/\s+/).length / 200 * 2) / 2;
 }
+
+function scrollComments() {
+	const comments = ref();
+	const el = comments;
+	// el.scrollIntoView({behavior: 'smooth'});
+	scrollTo(100, 0)
+}
 </script>
 
 <template>
+<meta name="title" property="og:title" :content="data.title">
+<meta name="description" property="og:description" :content="data.content">
+
 <Navbar></Navbar>
 <div class="width">
     <div class="margin" v-if="Object.keys(data).length">
@@ -48,9 +58,10 @@ function readTime(str) {
 			:likes="data.likes"
 			:readTime="readTime(data.content)"
 			@toggleMenu="menu = !menu"
+			@scrollComments = "scrollComments()"
 		></Top>
 		<Content class="content" :content="data.content" :sources="data.sources" :menu="menu"></Content>
-		<Comments :comments="data.comments" :id="data.id"></Comments>
+		<Comments ref="comments" :comments="data.comments" :id="data.id"></Comments>
     </div>
 	<div class="loading" v-if="!Object.keys(data).length">
 		<div class="inner">

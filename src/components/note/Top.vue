@@ -23,7 +23,7 @@ const props = defineProps([
     'readTime',
 ]);
 
-const emit = defineEmits(['toggleMenu']);
+const emit = defineEmits(['toggleMenu', 'scrollComments']);
 
 const image = "/tagImages/" + props.tag + ".jpg";
 
@@ -59,7 +59,7 @@ function formatDate(dateString) {
                     <div @click="emit('toggleMenu')" class="menu" :title="$t('note.openMenu')">
                         <IconMenuOpen></IconMenuOpen>
                     </div>
-                    <div class="comments" :title="$t('note.jumpComments')">
+                    <div class="comments" :title="$t('note.jumpComments')" @click="emit('scrollComments')">
                         <IconComments></IconComments><IconDown></IconDown>               
                     </div>
                 </div>
