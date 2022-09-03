@@ -36,6 +36,8 @@ function scrollComments() {
 	commentsRef.value.scrollIntoView();
 }
 
+
+
 </script>
 
 <template>

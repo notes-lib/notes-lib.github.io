@@ -9,7 +9,7 @@ import IconComments from '@/components/icons/IconComments.vue';
 import IconTime from '@/components/icons/IconTime.vue';
 import IconDown from '@/components/icons/IconDown.vue';
 import IconMenuOpen from '@/components/icons/IconMenuOpen.vue';
-import { useTitle } from 'vue-page-title';
+import { useHead } from "@vueuse/head"
 
 const props = defineProps([
     'id',
@@ -24,8 +24,6 @@ const props = defineProps([
     'readTime',
 ]);
 
-useTitle(props.title);
-
 const emit = defineEmits(['toggleMenu', 'scrollComments']);
 
 const image = "/tagImages/" + props.tag + ".jpg";
@@ -36,6 +34,20 @@ function formatDate(dateString) {
     date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
   );
 }
+
+useHead({
+    title: props.title,
+    meta: [
+    {
+        name: `title`,
+        content: props.title,
+    },
+    {
+        name: `description`,
+        content: '✍️ ' + props.author + ': 📅 ' + formatDate(props.date) + ', ⏱️ ' + props.readTime + 'min',
+    },
+    ],
+})
 </script>
 
 <template>
