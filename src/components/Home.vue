@@ -2,11 +2,13 @@
 import Welcome from "@/components/home/Welcome.vue";
 import NotePreviews from "@/components/home/NotePreviews.vue";
 import Navbar from "@/components/Navbar.vue";
+
+const emit = defineEmits(['contrast']);
 </script>
 
 <template>
   <header>
-      <Navbar></Navbar>
+      <Navbar @contrast="emit('contrast')"></Navbar>
       <div class="width">
         <Welcome></Welcome>
         <note-previews></note-previews>

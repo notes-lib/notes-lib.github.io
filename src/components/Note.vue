@@ -2,7 +2,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Top from '@/components/note/Top.vue';
 import axios from "axios";
-import { ref, onMounted  } from "vue";
+import { ref, onMounted } from "vue";
 import { url } from "@/assets/url.js";
 import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 import Content from '@/components/note/Content.vue';
@@ -33,16 +33,14 @@ function readTime(str) {
 }
 
 function scrollComments() {
-	commentsRef.value.scrollIntoView();
+	commentsRef.value.myScroll();
 }
-
-
 
 </script>
 
 <template>
 <Navbar></Navbar>
-<div class="width">
+<div class="width" >
     <div class="margin" v-if="Object.keys(data).length">
         <Top
 			:id="data.id"
@@ -66,7 +64,6 @@ function scrollComments() {
 			<clip-loader class="loader" color="var(--accent)" size="4rem"></clip-loader>		
 		</div>
 	</div>
-	
 </div>
 </template>
 

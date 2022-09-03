@@ -4,13 +4,15 @@ import IconDate from "@/components/icons/IconDate.vue";
 import IconLike from "@/components/icons/IconLike.vue";
 import IconView from "@/components/icons/IconView.vue";
 
-import "floating-vue/dist/style.css";
 import { hideAllPoppers } from "floating-vue";
 import { ref } from "vue";
 let placeholder = ref("home.sort");
 const emit = defineEmits(["date", "likes", "views"]);
 
+var show = ref(false);
+
 function clicked(sort) {
+  show.value = false;
   emit(sort);
   placeholder.value = "home." + sort;
   hideAllPoppers();
@@ -19,32 +21,22 @@ function clicked(sort) {
 
 <template>
   <div class="outer">
-    <VMenu
-      theme="my-theme"
-      :triggers="['click']"
-      :autoHide="true"
-      :distance="10"
-      placement="bottom"
-    >
-      <button>
-        <icon-sort></icon-sort>
-        {{ $t(placeholder) }}
-      </button>
+    <button @click="show = !show">
+      <icon-sort></icon-sort>
+      {{ $t(placeholder) }}
+    </button>
 
-      <template #popper>
-        <div class="inner">
-          <button @click="clicked('date')">
-            <icon-date></icon-date>{{ $t("home.date") }}
-          </button>
-          <button @click="clicked('likes')">
-            <icon-like></icon-like>{{ $t("home.likes") }}
-          </button>
-          <button @click="clicked('views')">
-            <icon-view></icon-view>{{ $t("home.views") }}
-          </button>
-        </div>
-      </template>
-    </VMenu>
+    <div v-if="show" class="inner">
+      <button @click="clicked('date')">
+        <icon-date></icon-date>{{ $t("home.date") }}
+      </button>
+      <button @click="clicked('likes')">
+        <icon-like></icon-like>{{ $t("home.likes") }}
+      </button>
+      <button @click="clicked('views')">
+        <icon-view></icon-view>{{ $t("home.views") }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -77,7 +69,7 @@ button:hover {
   fill: var(--accent);
 }
 
-.v-popper__inner button {
+.inner button {
   padding: 0.5rem;
   background-color: transparent;
   display: flex;
@@ -90,10 +82,9 @@ button:hover {
   border-radius: 10px;
   padding: 0.5rem;
   border: solid 0.5px var(--text);
+  position: absolute;
+  z-index: 2;
+  margin-top: 1rem;
 }
 
-/* Style */
-.v-popper--theme-my-theme .v-popper__inner {
-  color: #e66100;
-}
 </style>

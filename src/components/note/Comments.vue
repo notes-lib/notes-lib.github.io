@@ -14,10 +14,18 @@ function formatDate(dateString) {
     date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
   );
 }
+
+const wrapper = ref();
+
+function myScroll() {
+    wrapper.value.scrollIntoView();
+}
+
+defineExpose({ myScroll });
 </script>
 
 <template>
-    <div class="main">
+    <div class="main" ref="wrapper">
         <div class="head">
             <h2>{{$t('note.comments')}}</h2>
             <div class="new">

@@ -12,7 +12,7 @@ import { messages } from "./assets/messages.js";
 
 const t = new createI18n({
   legacy: false,
-  locale: "en",
+  locale: "it",
   globalInjection: true,
   messages,
 });

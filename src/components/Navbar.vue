@@ -5,7 +5,15 @@ import IconLanguage from "@/components/icons/IconLanguage.vue";
 import IconRules from "@/components/icons/IconRules.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
 
+import Translate from "@/components/navbar/Translate.vue";
+
 import { RouterLink } from "vue-router";
+
+import { ref } from 'vue';
+
+var translate = ref(false);
+
+const emit = defineEmits(['contrast']);
 </script>
 
 <template>
@@ -16,8 +24,8 @@ import { RouterLink } from "vue-router";
         <p>Notes Library</p>
       </RouterLink>
       <div class="end">
-        <IconContrast></IconContrast>
-        <IconLanguage></IconLanguage>
+        <IconContrast @click="emit('contrast')"></IconContrast>
+        <IconLanguage @click="translate = true"></IconLanguage>
         <IconRules></IconRules>
 
         <div class="surround">
@@ -28,6 +36,7 @@ import { RouterLink } from "vue-router";
       </div>
     </div>
   </nav>
+  <Translate v-if="translate" @close="translate = false"></Translate>
 </template>
 
 <style scoped>

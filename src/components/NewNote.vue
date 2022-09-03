@@ -94,13 +94,6 @@ function submitAll () {
 		return;
 	}
 
-	if (addAuthor.value.length < 5) {
-		showSubmitModal.value = false;
-		warningMessage.value = 'newNote.addAuthor';
-		showWarning.value = true;
-		return;
-	}
-
 	if (addTag.value.length < 1) {
 		showSubmitModal.value = false;
 		warningMessage.value = 'newNote.addTag';
@@ -136,6 +129,7 @@ function submitAll () {
 		return;
 	}
 
+	if (addAuthor.value === '' || addAuthor.value === null) addAuthor.value = 'anon';
 
 	axios.post(url + 'createNote.php', {
 		title: addTitle.value,
@@ -248,8 +242,8 @@ function submitAllConfirm () {
 			</div>
 		</div>
   </div>
-	<Editor v-if="editorContent" @close="editorContent = false" @submit="submitContent" storageKey="addContent"></Editor>
-	<Editor  v-if="editorSources" @close="editorSources = false" @submit="submitSources" storageKey="addSources"></Editor>
+  <Editor v-if="editorContent" @close="editorContent = false" @submit="submitContent" storageKey="addContent"></Editor>
+  <Editor v-if="editorSources" @close="editorSources = false" @submit="submitSources" storageKey="addSources"></Editor>
 </template>
 
 <style scoped>

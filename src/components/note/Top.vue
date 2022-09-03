@@ -162,14 +162,14 @@ useHead({
 
     .author {
         display: flex;
-        align-items: top;
+        align-items: center;
         gap: 0.5rem;
     }
 
     .modifiers {
         font-style: italic;
         display: flex;
-        align-items: top;
+        align-items: center;
         gap: 0.5rem;
         opacity: 0.5;
     }

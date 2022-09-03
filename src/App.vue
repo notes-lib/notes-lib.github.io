@@ -1,15 +1,32 @@
 <script setup>
 import { RouterView } from "vue-router";
+
+
+import { ref } from "vue";
+
+const contrast = ref(false);
+
+const initial = localStorage.getItem('contrast');
+initial === 'true' ? contrast.value = true : contrast.value = false;
+
+function swap() {
+  contrast.value = !contrast.value;
+  localStorage.setItem('contrast', contrast.value);
+  console.log(contrast.value);
+}
 </script>
 
 <template>
-  <RouterView>
-  </RouterView>
+  <div id="height" :class="contrast ? 'light-theme' : 'dark-theme'">
+    <RouterView @contrast="swap()">
+    </RouterView>
+  </div>
 </template>
 
 <style scoped>
-.width {
-  max-width: 55rem;
-  margin: auto;
+
+#height {
+  overflow: scroll;
+  min-height: 100%;
 }
 </style>

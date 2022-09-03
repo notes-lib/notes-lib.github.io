@@ -20,6 +20,8 @@ let selectedTag = ref("");
 let selectedLanguage = ref("");
 let selectedAuthor = ref("");
 
+var show = ref(false);
+
 const props = defineProps(['authors']);
 var authors = [];
 console.log(props.authors);
@@ -28,6 +30,7 @@ props.authors.forEach((value) => {
 })
 
 function clicked(filter) {
+  show.value = false;
   if (filter === "tag") showTag.value = true;
   if (filter === "language") showLanguage.value = true;
   if (filter === "author") showAuthor.value = true;
@@ -68,32 +71,23 @@ function clearAuthorFilter() {
 
 <template>
   <div class="outer">
-    <VMenu
-      theme="my-theme"
-      :triggers="['click']"
-      :autoHide="true"
-      :distance="10"
-      placement="bottom"
-    >
-      <button>
+      <button @click="show = !show">
         <icon-filter></icon-filter>
         {{ $t("home.filter") }}
       </button>
 
-      <template #popper>
-        <div class="inner">
-          <button @click="clicked('tag')">
-            <icon-tag></icon-tag>{{ $t("home.tag") }}
-          </button>
-          <button @click="clicked('author')">
-            <icon-author></icon-author>{{ $t("home.author") }}
-          </button>
-          <button @click="clicked('language')">
-            <icon-language></icon-language>{{ $t("home.language") }}
-          </button>
-        </div>
-      </template>
-    </VMenu>
+      <div v-if="show" class="inner">
+        <button @click="clicked('tag')">
+          <icon-tag></icon-tag>{{ $t("home.tag") }}
+        </button>
+        <button @click="clicked('author')">
+          <icon-author></icon-author>{{ $t("home.author") }}
+        </button>
+        <button @click="clicked('language')">
+          <icon-language></icon-language>{{ $t("home.language") }}
+        </button>
+      </div>
+
     <filter-modal
       v-if="showTag"
       filter="tag"
@@ -175,7 +169,7 @@ button:hover {
   fill: var(--accent);
 }
 
-.v-popper__inner button {
+.inner button {
   padding: 0.5rem;
   background-color: transparent;
   display: flex;
@@ -188,12 +182,11 @@ button:hover {
   border-radius: 10px;
   padding: 0.5rem;
   border: solid 0.5px var(--text);
+  position: absolute;
+  z-index: 2;
+  margin-top: 1rem;
 }
 
-/* Style */
-.v-popper--theme-my-theme .v-popper__inner {
-  color: #e66100;
-}
 
 .close:hover {
   fill: var(--accent);
