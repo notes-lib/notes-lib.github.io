@@ -40,11 +40,17 @@ useHead({
     meta: [
     {
         name: `title`,
+        type: 'og:title',
         content: props.title,
     },
     {
         name: `description`,
+        type: 'og:description',
         content: '✍️ ' + props.author + ': 📅 ' + formatDate(props.date) + ', ⏱️ ' + props.readTime + 'min',
+    },
+    {
+        type: 'og:type',
+        content: 'article',
     },
     ],
 })
