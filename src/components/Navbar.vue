@@ -1,17 +1,22 @@
 <script setup>
 import IconBookMark from "@/components/icons/IconBookMark.vue";
+import IconInfo from "@/components/icons/IconInfo.vue";
 import IconContrast from "@/components/icons/IconContrast.vue";
 import IconLanguage from "@/components/icons/IconLanguage.vue";
 import IconRules from "@/components/icons/IconRules.vue";
 import IconAdd from "@/components/icons/IconAdd.vue";
 
 import Translate from "@/components/navbar/Translate.vue";
+import Indications from "@/components/navbar/Indications.vue";
+import Info from "@/components/navbar/Info.vue";
 
 import { RouterLink } from "vue-router";
 
 import { ref } from 'vue';
 
 var translate = ref(false);
+var indications = ref(false);
+var info = ref(false);
 
 const emit = defineEmits(['contrast']);
 </script>
@@ -26,8 +31,8 @@ const emit = defineEmits(['contrast']);
       <div class="end">
         <IconContrast @click="emit('contrast')"></IconContrast>
         <IconLanguage @click="translate = true"></IconLanguage>
-        <IconRules></IconRules>
-
+        <IconRules @click="indications = true"></IconRules>
+        <IconInfo @click="info = true"></IconInfo>
         <div class="surround">
           <RouterLink to="/newNote">
             <IconAdd></IconAdd>
@@ -37,6 +42,8 @@ const emit = defineEmits(['contrast']);
     </div>
   </nav>
   <Translate v-if="translate" @close="translate = false"></Translate>
+  <Indications v-if="indications" @close="indications = false"></Indications>
+  <Info v-if="info" @close="info = false"></Info>
 </template>
 
 <style scoped>

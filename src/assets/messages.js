@@ -69,6 +69,24 @@ export const messages = {
       comments: "Comments",
       sources: "Sources",
     },
+    indications: {
+      indications: "Indications",
+      one: "Don't plagiarize",
+      two: "Don't submit photos of hand-written notes",
+      three: "Remember to add sources when possible, like a book title or website link",
+      four: "Keep vulgar language to a reasonable level",
+      five: "Remember that everything on this website is available to the open internet",
+      six: "Multiple notes on the same topic are welcomed, as long as they are unique",
+      seven: "Remember that everything you submit could be modified by the moderation team",
+    },
+    info: {
+      info: "Info",
+      createdBy: "Created by {0}",
+      contact: "Contact me at {0}",
+      source: "Source code at {0}",
+      createdWith: "Created with: ", 
+      asWell: "As well as ink-mde, nord theme, and remix icons"
+    },
     tags: {
       algebra: "#algebra",
       arithmetic: "#arithmetic",
@@ -174,6 +192,24 @@ export const messages = {
       openMenu: "Apri tabella dei contenuti",
       comments: "Commenti",
       sources: "Fonti",
+    },
+    indications: {
+      indications: "Indicazioni",
+      one: "Non plagiate",
+      two: "Non inviate foto di appunti scritti a mano",
+      three: "Ricordatevi di aggiungere le fonti quando possibile, come il titolo di un libro o un link a un sito",
+      four: "Usate ragionevolmente il linguaggio volgare",
+      five: "Ricordatevi che tutto quanto su questo sito è accessibile da tutto l'internet",
+      six: "Più appunti sullo stesso argomento sono accettati, basta che siano originali",
+      seven: "Ricordatevi che tutto quanto che inviate può essere modificato dal team di moderazione",
+    },
+    info: {
+      info: "Info",
+      createdBy: "Creato da {0}",
+      contact: "Contattami con {0}",
+      source: "Codice sorgente a {0}",
+      createdWith: "Creato con: ", 
+      asWell: "E anche ink-mde, nord theme, e remix icons"
     },
     tags: {
       algebra: "#algebra",

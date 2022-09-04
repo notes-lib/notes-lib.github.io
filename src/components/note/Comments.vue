@@ -51,7 +51,7 @@ defineExpose({ myScroll });
 <style scoped>
 
 .main {
-    margin: 2rem 0rem;
+    margin-top: 2rem;
 }
 
 .head {
