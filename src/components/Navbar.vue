@@ -92,6 +92,7 @@ nav {
   color: var(--text);
   fill: var(--text);
   gap: 10px;
+  min-width: 4rem;
 }
 
 .start:hover {
@@ -101,7 +102,7 @@ nav {
 
 @media (max-width: 500px) {
   p {
-    visibility: hidden;
+    display: none;
   }
 }
 </style>

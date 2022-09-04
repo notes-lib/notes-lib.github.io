@@ -163,6 +163,7 @@ function moveUp() {
     }
 
     :deep(img) {
+        margin-top: 1rem;
         max-height: 50rem;
         max-width: 100%;
     }
