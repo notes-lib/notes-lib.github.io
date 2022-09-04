@@ -24,6 +24,8 @@ button {
     --text: #eceff4;
     background-color: var(--background);
     color: var(--text);
+    overflow: hidden !important;
+    padding: 0;
 }
 
 .light-theme {
@@ -33,5 +35,7 @@ button {
     --text: #4c566a;
     background-color: var(--background);
     color: var(--text);
+    overflow: hidden;
+    padding: 0;
 }
 * { margin: 0; padding: 0; }

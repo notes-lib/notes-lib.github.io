@@ -110,7 +110,7 @@ export const messages = {
       a1: "È una libreria di appunti creata da uno studente del Liceo E.Fermi di Padova, contenente i suoi appunti e anche quelli della comunità.",
       q2: "Come faccio a contribuire?",
       a2: "Leggete le regole e cliccate il tasto + per cominciare.",
-      sort: "Ordine",
+      sort: "Ordina",
       date: "Data",
       views: "View",
       likes: "Like",

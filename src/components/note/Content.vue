@@ -24,9 +24,10 @@ function moveUp() {
 </script>
 
 <template>
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
     <div>
         <Markdown :class="{menu: props.menu}" :plugins="plugins" :source="'[toc]\n' + props.content"/>
-        <div class="sources" v-if="props.sources">
+        <div class="sources" v-if="props.sources !== null && props.sources !== 'null' && props.sources !== ''">
             <h2>{{$t('note.sources')}}</h2>
             <Markdown :plugins="plugins" :source="props.sources"/>        
         </div>
@@ -38,6 +39,11 @@ function moveUp() {
 
 <style scoped>
     @import url(//fonts.googleapis.com/css?family=Source+Code+Pro);
+
+    :deep(.katex-display) {
+        overflow: auto;
+        white-space: nowrap;
+    }
 
     .sources {
         border-left: 5px solid var(--surface);
