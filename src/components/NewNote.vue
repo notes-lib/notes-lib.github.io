@@ -7,6 +7,7 @@ import IconFlag from "@/components/icons/IconFlag.vue";
 import IconContent from "@/components/icons/IconContent.vue";
 import IconSources from "@/components/icons/IconSources.vue";
 import IconDelete from "@/components/icons/IconDelete.vue";
+import IconSubmit from "@/components/icons/IconSubmit.vue";
 import Editor from "@/components/newNote/editor.vue";
 import Navbar from "@/components/Navbar.vue";
 import TagModal from "@/components/newNote/tagModal.vue";
@@ -68,13 +69,11 @@ function saveAll () {
 
 function clearAll () {
 	localStorage.setItem("addTitle", null);
-	localStorage.setItem("author", null);
 	localStorage.setItem("addTag", null);
 	localStorage.setItem("addLanguage", null);
 	localStorage.setItem("addSources", null);
 	localStorage.setItem("addContent", null);
 	addTitle.value = '';
-	addAuthor.value = '';
 	addTag.value = '';
 	addLanguage.value = '';
 	saveAll();
@@ -239,7 +238,7 @@ function submitAllConfirm () {
 			<div class="final">
 				<IconDelete @click="clearAllConfirm()"></IconDelete>
 				<span><button @click="Router.push('/')">{{ $t('newNote.cancel') }}</button>
-				<button @click="submitAllConfirm()" class="submit">{{ $t('newNote.submit') }}</button></span>
+				<button @click="submitAllConfirm()" class="submit"><IconSubmit></IconSubmit>{{ $t('newNote.submit') }}</button></span>
 			</div>
 			</div>
 		</div>
@@ -275,11 +274,16 @@ function submitAllConfirm () {
 	.final .submit {
 		background-color: var(--accent);
 		color: var(--background);
+		display: flex;
+		align-items: center;
+		fill: var(--background);
+		gap: 0.5rem;
 	}
 	
 	.final .submit:hover {
 		background-color: var(--surface);
 		color: var(--accent);
+		fill: var(--accent);
 	}
 
 	.editors {

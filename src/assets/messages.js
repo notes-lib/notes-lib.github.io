@@ -68,6 +68,9 @@ export const messages = {
       openMenu: "Open table of contents",
       comments: "Comments",
       sources: "Sources",
+      submit: "Submit",
+      username: "Username",
+      content: "Comment"
     },
     indications: {
       indications: "Indications",

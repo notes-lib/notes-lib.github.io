@@ -5,7 +5,9 @@ import IconUser from "@/components/icons/IconUser.vue";
 
 import { ref } from "vue";
 
+
 const props = defineProps(['comments', 'id']);
+
 var comments = ref(props.comments);
 
 function formatDate(dateString) {
@@ -21,19 +23,31 @@ function myScroll() {
     wrapper.value.scrollIntoView();
 }
 
+var newComment = ref(false);
+
 defineExpose({ myScroll });
+
+function add(author, content, time) {
+    comments.value.push(
+        {
+            author: author,
+            content: content,
+            date: time.toString(),
+        }
+    )
+}
 </script>
 
 <template>
     <div class="main" ref="wrapper">
         <div class="head">
             <h2>{{$t('note.comments')}}</h2>
-            <div class="new">
+            <div class="new" @click="newComment = !newComment">
                 <IconNewComment></IconNewComment>New            
             </div>
         </div>
-        <NewComment></NewComment>
-        <div class="comments">
+        <NewComment @newComment="add" v-if="newComment"></NewComment>
+        <div v-if="comments" class="comments-list">
             <div v-for="comment in comments" class="comment">
                 <div class="top">
                     <div class="author">
@@ -62,8 +76,8 @@ defineExpose({ myScroll });
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .new {
@@ -81,10 +95,11 @@ defineExpose({ myScroll });
     color: var(--accent);
 }
 
-.comments {
+.comments-list {
+    padding-top: 1rem;
     display: flex;
     gap: 1rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .comment {

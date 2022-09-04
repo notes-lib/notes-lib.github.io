@@ -13,22 +13,28 @@ const route = useRoute()
 var data = ref({});
 var menu = ref(false);
 const commentsRef = ref(null);
+const commentsContent = ref([]);
 
 const emit = defineEmits(['contrast']);
 
-axios.post(url + 'readNote.php', {
-	id: route.params.id,
-},{ 
-	headers: {
-		'Content-Type': 'multipart/form-data'
-	}
-})
-.then(function (response) {
-	data.value = response.data;
-})
-.catch(function (error) {
-	alert('Something went wrong');
-});
+function getData () {
+	axios.post(url + 'readNote.php', {
+		id: route.params.id,
+	},{ 
+		headers: {
+			'Content-Type': 'multipart/form-data'
+		}
+	})
+	.then(function (response) {
+		data.value = response.data;
+		commentsContent.value = data.value.comments
+	})
+	.catch(function (error) {
+		alert('Something went wrong');
+	});
+}
+
+getData();
 
 function readTime(str) {
 	return Math.round(str.trim().split(/\s+/).length / 200 * 2) / 2;
@@ -59,7 +65,7 @@ function scrollComments() {
 			@scrollComments = "scrollComments()"
 		></Top>
 		<Content class="content" :content="data.content" :sources="data.sources" :menu="menu"></Content>
-		<Comments ref="commentsRef" class="comments" :comments="data.comments" :id="data.id"></Comments>
+		<Comments ref="commentsRef" class="comments" :comments="commentsContent" :id="data.id"></Comments>
     </div>
 	<div class="loading" v-if="!Object.keys(data).length">
 		<div class="inner">
