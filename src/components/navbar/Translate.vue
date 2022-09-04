@@ -1,9 +1,14 @@
 <script setup>
     import IconClose from '@/components/icons/IconClose.vue';
     import IconLanguage from '@/components/icons/IconLanguage.vue';
-    import '@/main.js';
 
     const emit = defineEmits(['close']);
+
+    function setLang (selected) {
+        localStorage.setItem('language', selected);
+        emit('close');
+    }
+
 </script>
 
 <template>
@@ -11,8 +16,8 @@
         <div class="modal">
             <h3><IconLanguage></IconLanguage><IconClose class="click" @click="emit('close')"></IconClose></h3>       
             <div class="bottom">
-                <button @click="$t.locale = 'en'">English</button>
-                <button @click="$t.locale = 'it'">Italiano</button>
+                <button @click="$i18n.locale = 'en'; setLang('en')">English</button>
+                <button @click="$i18n.locale = 'it'; setLang('it')">Italiano</button>
             </div>
         </div>
     </div>

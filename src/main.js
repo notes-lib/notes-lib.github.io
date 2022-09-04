@@ -1,7 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
-import FloatingVue from "floating-vue";
 import { createHead } from "@vueuse/head"
 
 import App from "./App.vue";
@@ -10,9 +9,11 @@ import router from "./router";
 import "./assets/main.css";
 import { messages } from "./assets/messages.js";
 
-const t = new createI18n({
+let language = localStorage.getItem('language');
+
+const t = createI18n({
   legacy: false,
-  locale: "it",
+  locale: language ?? navigator.language.split('-')[0],
   globalInjection: true,
   messages,
 });
@@ -25,14 +26,5 @@ app.use(createPinia());
 app.use(router);
 app.use(t);
 app.use(head);
-app.use(FloatingVue, {
-  themes: {
-    "my-theme": {
-      triggers: ["click"],
-      autoHide: true,
-      placement: "bottom",
-    },
-  },
-});
 
 app.mount("#app");

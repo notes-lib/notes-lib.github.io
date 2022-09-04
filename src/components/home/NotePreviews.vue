@@ -175,7 +175,7 @@ console.log(filters);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  row-gap: 1.5rem;
+  gap: 0.5rem;
 }
 
 .second:hover {
