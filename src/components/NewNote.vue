@@ -19,6 +19,8 @@ import Router from "@/router/index.js";
 import { url } from "@/assets/url.js";
 import axios from "axios";
 
+const emit = defineEmits(['contrast']);
+
 const showTagModal = ref(false);
 const showClearModal = ref(false);
 const showSubmitModal = ref(false);
@@ -165,7 +167,7 @@ function submitAllConfirm () {
 
 <template>
   <div v-if="editorContent === false && editorSources === false">
-		<Navbar></Navbar>
+		<Navbar @contrast="emit('contrast')"></Navbar>
 		<modal v-if="showClearModal" @close="showClearModal = false" @action="clearAll()" title="newNote.confirmClear" action="newNote.clearAll"></modal>
 		<modal v-if="showSubmitModal" @close="showSubmitModal = false" @action="submitAll()" title="newNote.confirmSubmit" action="newNote.submit"></modal>
 		<TagModal 

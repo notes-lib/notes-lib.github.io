@@ -13,7 +13,7 @@ let language = localStorage.getItem('language');
 
 const t = createI18n({
   legacy: false,
-  locale: language ?? navigator.language.split('-')[0],
+  locale: language ?? navigator.language.split('-')[0] ?? 'en',
   globalInjection: true,
   messages,
 });

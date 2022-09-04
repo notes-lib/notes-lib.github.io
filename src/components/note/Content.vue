@@ -40,6 +40,10 @@ function moveUp() {
 <style scoped>
     @import url(//fonts.googleapis.com/css?family=Source+Code+Pro);
 
+    :deep(.table-of-contents) a {
+        pointer-events: none;
+        cursor: default;
+    }
     :deep(.katex-display) {
         overflow: auto;
         white-space: nowrap;

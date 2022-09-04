@@ -4,10 +4,10 @@ import { RouterView } from "vue-router";
 
 import { ref } from "vue";
 
-const contrast = ref(false);
+const contrast = ref(true);
 
 const initial = localStorage.getItem('contrast');
-initial === 'true' ? contrast.value = true : contrast.value = false;
+initial === 'true' ? contrast.value = false : contrast.value = true;
 
 function swap() {
   contrast.value = !contrast.value;

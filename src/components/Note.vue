@@ -14,6 +14,8 @@ var data = ref({});
 var menu = ref(false);
 const commentsRef = ref(null);
 
+const emit = defineEmits(['contrast']);
+
 axios.post(url + 'readNote.php', {
 	id: route.params.id,
 },{ 
@@ -39,7 +41,7 @@ function scrollComments() {
 </script>
 
 <template>
-<Navbar></Navbar>
+<Navbar @contrast="emit('contrast')"></Navbar>
 <div class="width" >
     <div class="margin" v-if="Object.keys(data).length">
         <Top
