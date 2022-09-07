@@ -10,13 +10,14 @@ initial === 'true' ? contrast.value = true : contrast.value = false;
 
 function swap() {
   contrast.value = !contrast.value;
-  document.body.classList.add('light-theme');
+  document.body.classList.remove('light-theme'); 
+  document.body.classList.remove('dark-theme'); 
+  document.body.classList.add(!contrast.value ? 'light-theme' : 'dark-theme');
   localStorage.setItem('contrast', contrast.value);
-  console.log(contrast.value);
 }
 
 onMounted(() => {
-    document.body.classList.add(!contrast ? 'light-theme' : 'dark-theme');
+    document.body.classList.add(!contrast.value ? 'light-theme' : 'dark-theme');
 })
 </script>
 

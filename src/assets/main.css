@@ -1,67 +1,26 @@
 /* based on nord theme */
 @import url(//fonts.googleapis.com/css?family=Inter);
 
-#app {
-    height: 100%;
-}
-
-/* html, body {
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
-    height: 100%;
-    background-color: var(--background);
-    color: var(--text);
-}
-
-button {
-    font-family: 'Inter', sans-serif;
-}
-
-.dark-theme {
-    --background: #242933;
-    --surface: #2e3440;
-    --accent: #88c0d0;
-    --text: #eceff4;
-    background-color: var(--background);
-    color: var(--text);
-    overflow: hidden !important;
-    padding: 0;
-}
-
-.light-theme {
-    --background: #e5e9f0;
-    --surface: #d8dee9;
-    --accent: #88c0d0;
-    --text: #4c566a;
-    background-color: var(--background);
-    color: var(--text);
-    overflow: hidden;
-    padding: 0;
-} */
 * { margin: 0; padding: 0; }
 
 body.dark-theme {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    height: 100%;
     --background: #242933;
     --surface: #2e3440;
     --accent: #88c0d0;
     --text: #eceff4;
     background-color: var(--background);
     color: var(--text);
-    overflow: hidden !important;
 }
 
 body.light-theme {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    height: 100%;
     --background: #e5e9f0;
     --surface: #d8dee9;
     --accent: #88c0d0;
     --text: #4c566a;
     background-color: var(--background);
     color: var(--text);
-    overflow: hidden !important;
 }
