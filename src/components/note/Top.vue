@@ -99,7 +99,7 @@ useHead({
                     <IconLanguage></IconLanguage>
                     {{$t('languages.' + props.language)}}
                 </div>
-                <div v-if="props.datemod !== null" :title="$t('note.modified')" class="detail">
+                <div v-if="props.datemod !== null && props.datemod !== ''" :title="$t('note.modified')" class="detail">
                     <IconModify></IconModify>
                     <span>{{formatDate(props.datemod)}}</span>
                 </div>
