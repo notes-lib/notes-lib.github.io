@@ -1,11 +1,12 @@
 export const messages = {
   en: {
     home: {
+      title: "Notes Library",
       welcome: "Welcome to the Alexandria of notes",
       q1: "What is this website?",
       a1: "This is a library of notes created by a student of the Lyceum E.Fermi of Padua, containing their and community submitted notes.",
       q2: "How do I contribute?",
-      a2: "Read the rules and click the + button to start.",
+      a2: "Read the indications and click the + button to start.",
       sort: "Sort",
       date: "Date",
       views: "Views",
@@ -70,7 +71,8 @@ export const messages = {
       sources: "Sources",
       submit: "Submit",
       username: "Username",
-      content: "Comment"
+      content: "Comment",
+      new: "New",
     },
     indications: {
       indications: "Indications",
@@ -126,11 +128,12 @@ export const messages = {
   },
   it: {
     home: {
+      title: "Notes Library",
       welcome: "Benvenuti all'Alessandria degli appunti",
       q1: "Cos'è questo sito?",
       a1: "È una biblioteca di appunti creata da uno studente del Liceo E.Fermi di Padova, contenente i suoi appunti e anche quelli della comunità.",
       q2: "Come faccio a contribuire?",
-      a2: "Leggete le regole e cliccate il tasto + per cominciare.",
+      a2: "Leggete le indicazioni e cliccate il tasto + per cominciare.",
       sort: "Ordina",
       date: "Data",
       views: "View",
@@ -195,6 +198,7 @@ export const messages = {
       openMenu: "Apri tabella dei contenuti",
       comments: "Commenti",
       sources: "Fonti",
+      new: "Aggiungi"
     },
     indications: {
       indications: "Indicazioni",

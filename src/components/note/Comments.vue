@@ -43,7 +43,7 @@ function add(author, content, time) {
         <div class="head">
             <h2>{{$t('note.comments')}}</h2>
             <div class="new" @click="newComment = !newComment">
-                <IconNewComment></IconNewComment>New            
+                <IconNewComment></IconNewComment>{{$t('note.new')}}            
             </div>
         </div>
         <NewComment @newComment="add" v-if="newComment"></NewComment>

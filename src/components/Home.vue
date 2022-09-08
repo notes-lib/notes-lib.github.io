@@ -2,6 +2,15 @@
 import Welcome from "@/components/home/Welcome.vue";
 import NotePreviews from "@/components/home/NotePreviews.vue";
 import Navbar from "@/components/Navbar.vue";
+import { useI18n } from 'vue-i18n';
+import { useHead } from "@vueuse/head"
+
+
+const { t } = useI18n({ useScope: 'global' })
+
+useHead({
+    title: t("home.title"),
+})
 
 const emit = defineEmits(['contrast']);
 </script>

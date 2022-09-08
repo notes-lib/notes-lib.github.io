@@ -15,10 +15,18 @@ import Modal from "@/components/generic/Modal.vue";
 import WarningModal from "@/components/generic/WarningModal.vue";
 
 import { tags, languages } from '@/assets/config.js';
+import { useHead } from "@vueuse/head"
 import { ref } from "vue";
 import Router from "@/router/index.js";
 import { url } from "@/assets/url.js";
 import axios from "axios";
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n({ useScope: 'global' })
+
+useHead({
+    title: t("newNote.contribute"),
+})
 
 const emit = defineEmits(['contrast']);
 
@@ -230,7 +238,7 @@ function submitAllConfirm () {
 						<li>{{ $t('newNote.contentExplain2') }}</li>
 						
 					  <i18n-t keypath="newNote.contentExplain3" tag="li" for="newNote.contentExplain3">
-					    <a href="https://imgbox.com/" target="_blank">imgbox</a>
+					    <a href="https://imgur.com/" target="_blank">imgur</a>
 					  </i18n-t>
 					</ul>
 				</div>
