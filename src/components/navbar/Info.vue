@@ -22,45 +22,45 @@
                 <h3>{{$t('info.createdWith')}}</h3>
                 <ul>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://vuejs.org/" target="_blank">
                             <svg alt="Vue.js logo" version="1.1" viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883"/></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e"/></g></g></svg>
                             Vue.js
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://vitejs.dev" target="_blank">
                             <img alt="Vite logo" src="https://vitejs.dev/logo.svg">
                             Vite
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://www.php.net/" target="_blank">
                             <img alt="PHP logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/512px-PHP-logo.svg.png">
                             PHP
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://www.mysql.com/" target="_blank">
                             <img alt="MySQL logo" src="https://www.mysql.com/common/logos/logo-mysql-170x115.png">
                             MySQL
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://github.com/features/actions" target="_blank">
                             <img alt="Github actions logo" src="https://github.githubassets.com/images/modules/site/features/actions-icon-actions.svg">
                             Github actions
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner" href="https://metrica.yandex.com" target="_blank">
                             <img class="metrica" alt="Metrica logo" src="https://yastatic.net/s3/home/services/all/svg/metrika.svg">
                             Yandex Metrica
-                        </span>
+                        </a>
                     </li>
                     <li>
-                        <span class="inner">
+                        <a class="inner">
                             {{$t('info.asWell')}}
-                        </span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -76,9 +76,6 @@
         max-width: 30rem;
         max-height: 90%;
         margin: 1rem;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
         border: solid 1px var(--text);
         border-radius: 10px;
         overflow-y: auto;
@@ -131,6 +128,8 @@
         display: flex;
         justify-content: center;
         background-color: #000000a1;
+        align-items: center;
+        align-content: center;
     }
 
     svg.click:hover {
@@ -160,6 +159,7 @@
         font-size: 17px;
         vertical-align: middle;
         height: 35px;
+        color: var(--text);
     }
 
     .inner svg {
