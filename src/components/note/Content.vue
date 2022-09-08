@@ -75,7 +75,7 @@ function moveUp() {
     }
 
     :deep(p) {
-        font-size: 17px;
+        font-size: 16px;
         line-height: 32px;
     }
     
@@ -114,12 +114,12 @@ function moveUp() {
     :deep(ul) {
         margin-top: 1rem;
         margin-left: 1.5rem;
-        font-size: 17px;
+        font-size: 16px;
     }
 
     :deep(ol) {
         margin-left: 1.5rem;
-        font-size: 17px;
+        font-size: 16px;
     }
 
     :deep(p) {
@@ -164,7 +164,7 @@ function moveUp() {
 
     :deep(img) {
         margin-top: 1rem;
-        max-height: 50rem;
+        max-height: 35rem;
         max-width: 100%;
     }
 
