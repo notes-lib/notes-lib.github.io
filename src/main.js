@@ -1,17 +1,22 @@
+import { messages } from "@/assets/messages.js";
+import App from "@/App.vue";
+import router from "@/router";
+
+import "@/assets/main.css";
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
-import { createHead } from "@vueuse/head"
+import { createHead } from "@vueuse/head";
 
-import App from "./App.vue";
-import router from "./router";
+//initially see if localstorage has it
+let language = localStorage.getItem("language");
 
-import "./assets/main.css";
-import { messages } from "./assets/messages.js";
+//if it doesn't see browser language
+if (language === null) language = navigator.language.split("-")[0] ?? "en";
 
-let language = localStorage.getItem('language');
-if (language === null) language = navigator.language.split('-')[0] ?? 'en';
-if (language != 'it' && language != 'en') language = 'en';
+//if browser doesn't have a matching language revert to default
+if (language != "it" && language != "en") language = "en";
 
 const t = createI18n({
   legacy: false,
@@ -20,7 +25,7 @@ const t = createI18n({
   messages,
 });
 
-const head = createHead()
+const head = createHead();
 
 const app = createApp(App);
 

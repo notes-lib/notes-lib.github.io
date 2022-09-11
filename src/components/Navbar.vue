@@ -1,24 +1,23 @@
 <script setup>
-import IconBookMark from "@/components/icons/IconBookMark.vue";
-import IconInfo from "@/components/icons/IconInfo.vue";
-import IconContrast from "@/components/icons/IconContrast.vue";
-import IconLanguage from "@/components/icons/IconLanguage.vue";
-import IconRules from "@/components/icons/IconRules.vue";
-import IconAdd from "@/components/icons/IconAdd.vue";
+import { useSettingsStore } from "@/stores/settings.js";
+import { useModalsStore } from "@/stores/modals.js";
 
-import Translate from "@/components/navbar/Translate.vue";
 import Indications from "@/components/navbar/Indications.vue";
 import Info from "@/components/navbar/Info.vue";
+import Translate from "@/components/navbar/Translate.vue";
 
+import IconAdd from "@/components/icons/IconAdd.vue";
+import IconBookMark from "@/components/icons/IconBookMark.vue";
+import IconContrast from "@/components/icons/IconContrast.vue";
+import IconInfo from "@/components/icons/IconInfo.vue";
+import IconLanguage from "@/components/icons/IconLanguage.vue";
+import IconRules from "@/components/icons/IconRules.vue";
+
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
-import { ref } from 'vue';
-
-var translate = ref(false);
-var indications = ref(false);
-var info = ref(false);
-
-const emit = defineEmits(['contrast']);
+const settings = useSettingsStore();
+const modals = useModalsStore();
 </script>
 
 <template>
@@ -29,10 +28,10 @@ const emit = defineEmits(['contrast']);
         <p>Notes Library</p>
       </RouterLink>
       <div class="end">
-        <IconContrast @click="emit('contrast')"></IconContrast>
-        <IconLanguage @click="translate = true"></IconLanguage>
-        <IconRules @click="indications = true"></IconRules>
-        <IconInfo @click="info = true"></IconInfo>
+        <IconContrast @click="settings.updateTheme()"></IconContrast>
+        <IconLanguage @click="modals.translate = true"></IconLanguage>
+        <IconRules @click="modals.indications = true"></IconRules>
+        <IconInfo @click="modals.info = true"></IconInfo>
         <div class="surround">
           <RouterLink to="/newNote">
             <IconAdd></IconAdd>
@@ -41,9 +40,9 @@ const emit = defineEmits(['contrast']);
       </div>
     </div>
   </nav>
-  <Translate v-if="translate" @close="translate = false"></Translate>
-  <Indications v-if="indications" @close="indications = false"></Indications>
-  <Info v-if="info" @close="info = false"></Info>
+  <Translate v-if="modals.translate"></Translate>
+  <Indications v-if="modals.indications"></Indications>
+  <Info v-if="modals.info"></Info>
 </template>
 
 <style scoped>

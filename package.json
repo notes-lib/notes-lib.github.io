@@ -18,7 +18,7 @@
     "markdown-it-katex-external": "^1.0.0",
     "markdown-it-texmath": "^1.0.0",
     "markdown-it-vue": "^1.1.7",
-    "pinia": "^2.0.16",
+    "pinia": "^2.0.22",
     "vue": "^3.2.37",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.2",

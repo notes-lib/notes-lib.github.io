@@ -25,7 +25,8 @@ export const messages = {
       contribute: "Contribute an entry",
       title: "Title",
       username: "Username",
-      explain: "This is the name the entry will be published under, keep in mind that it will be available to the open internet. If you would like to remain anonymous just leave this empty.",
+      explain:
+        "This is the name the entry will be published under, keep in mind that it will be available to the open internet. If you would like to remain anonymous just leave this empty.",
       language: "Language",
       tag: "Tag",
       select: "Select",
@@ -35,17 +36,20 @@ export const messages = {
       openEditor: "Open editor",
       sources: "Sources",
       optional: "Optional",
-      contentExplain1: "This site uses {0} for formatting content, similar to whatsapp and discord. It is very simple to use and our interactive editor helps with the process.",
-      contentExplain2: "Small note, you don't need to include a title in your article as you have already specified one above.",
-      contentExplain3: "This site only uses image links to save on server space, if you need an image link you can use {0} or any other service that provides a direct link.",
+      contentExplain1:
+        "This site uses {0} for formatting content, similar to whatsapp and discord. It is very simple to use and our interactive editor helps with the process.",
+      contentExplain2:
+        "Small note, you don't need to include a title in your article as you have already specified one above.",
+      contentExplain3:
+        "This site only uses image links to save on server space, if you need an image link you can use {0} or any other service that provides a direct link.",
       cancel: "Cancel",
       submit: "Submit",
       editContent: "Edit content",
       confirmClear: "Clear all form content?",
       clearAll: "Clear all",
-      confirmSubmit: "Submit entry to database?",  
-      close: "Close",  
-      addTitle: "Add a title",  
+      confirmSubmit: "Submit entry to database?",
+      close: "Close",
+      addTitle: "Add a title",
       addTag: "Add a tag",
       addLanguage: "Add a language",
       addContent: "Minimum length for entry is 300 characters",
@@ -73,24 +77,27 @@ export const messages = {
       username: "Username",
       content: "Comment",
       new: "New",
+      anon: "Anonymous",
     },
     indications: {
       indications: "Indications",
       one: "Don't plagiarize",
       two: "Don't submit photos of hand-written notes",
-      three: "Remember to add sources when possible, like a book title or website link",
+      three:
+        "Remember to add sources when possible, like a book title or website link",
       four: "Keep vulgar language to a reasonable level",
       five: "Remember that everything on this website is available to the open internet",
       six: "Multiple notes on the same topic are welcomed, as long as they are unique",
-      seven: "Remember that everything you submit could be modified by the moderation team",
+      seven:
+        "Remember that everything you submit could be modified by the moderation team",
     },
     info: {
       info: "Info",
       createdBy: "Created by {0}",
       contact: "Contact me at {0}",
       source: "Source code at {0}",
-      createdWith: "Created with: ", 
-      asWell: "As well as ink-mde, nord theme, and remix icons"
+      createdWith: "Created with: ",
+      asWell: "As well as ink-mde, nord theme, and remix icons",
     },
     tags: {
       algebra: "#algebra",
@@ -152,7 +159,8 @@ export const messages = {
       contribute: "Contribuisci un articolo",
       title: "Titolo",
       username: "Nome utente",
-      explain: "Questo è il nome sotto il quale verrà pubblicato l'articolo, tenete a mente che sarà accessibile a tutto l'internet. Se preferite rimanere anonimi lasciate vuota questa casella.",
+      explain:
+        "Questo è il nome sotto il quale verrà pubblicato l'articolo, tenete a mente che sarà accessibile a tutto l'internet. Se preferite rimanere anonimi lasciate vuota questa casella.",
       language: "Lingua",
       tag: "Tag",
       select: "Seleziona",
@@ -162,19 +170,24 @@ export const messages = {
       openEditor: "Apri editor",
       sources: "Fonti",
       optional: "Facoltativo",
-      contentExplain1: "Questo sito usa {0} per formattare contenuti, simile a whatsapp e discord. È molto semplice da usare e il nostro editor interattivo vi aiuta.",
-      contentExplain2: "Small note, you don't need to include a title in your article as you have already specified one above.",
-      contentExplain2: "Piccolo appunto, non vi serve includere un titolo visto che avete già inserito uno sopra.",
-      contentExplain3: "This site only uses image links to save on server space, if you need an image link you can use {0} or any other service that provides a direct link.",
-      contentExplain3: "Questo sito usa solo link a immagini esterni per salvare spazio sul server, se dovete creare un link potete usare {0} o qualsiasi altro servizio che produce link diretti.",
+      contentExplain1:
+        "Questo sito usa {0} per formattare contenuti, simile a whatsapp e discord. È molto semplice da usare e il nostro editor interattivo vi aiuta.",
+      contentExplain2:
+        "Small note, you don't need to include a title in your article as you have already specified one above.",
+      contentExplain2:
+        "Piccolo appunto, non vi serve includere un titolo visto che avete già inserito uno sopra.",
+      contentExplain3:
+        "This site only uses image links to save on server space, if you need an image link you can use {0} or any other service that provides a direct link.",
+      contentExplain3:
+        "Questo sito usa solo link a immagini esterni per salvare spazio sul server, se dovete creare un link potete usare {0} o qualsiasi altro servizio che produce link diretti.",
       cancel: "Annulla",
       submit: "Invia",
       editContent: "Modifica contenuti",
       confirmClear: "Cancella tutti i contenuti del modulo?",
       clearAll: "Cancella tutto",
-      confirmSubmit: "Invia articolo?",  
-      close: "Chiudi",  
-      addTitle: "Aggiungete un title",  
+      confirmSubmit: "Invia articolo?",
+      close: "Chiudi",
+      addTitle: "Aggiungete un title",
       addTag: "Aggiungete un tag",
       addLanguage: "Aggiungete una lingua",
       addContent: "Lunghezza minima per un articolo sono 300 caratteri",
@@ -198,25 +211,28 @@ export const messages = {
       openMenu: "Apri tabella dei contenuti",
       comments: "Commenti",
       sources: "Fonti",
-      new: "Aggiungi"
+      new: "Aggiungi",
+      anon: "Anonimo",
     },
     indications: {
       indications: "Indicazioni",
       one: "Non plagiate",
       two: "Non inviate foto di appunti scritti a mano",
-      three: "Ricordatevi di aggiungere le fonti quando possibile, come il titolo di un libro o un link a un sito",
+      three:
+        "Ricordatevi di aggiungere le fonti quando possibile, come il titolo di un libro o un link a un sito",
       four: "Usate ragionevolmente il linguaggio volgare",
       five: "Ricordatevi che tutto quanto su questo sito è accessibile da tutto l'internet",
       six: "Più appunti sullo stesso argomento sono accettati, basta che siano originali",
-      seven: "Ricordatevi che tutto quanto che inviate può essere modificato dal team di moderazione",
+      seven:
+        "Ricordatevi che tutto quanto che inviate può essere modificato dal team di moderazione",
     },
     info: {
       info: "Info",
       createdBy: "Creato da {0}",
       contact: "Contattami con {0}",
       source: "Codice sorgente a {0}",
-      createdWith: "Creato con: ", 
-      asWell: "E anche ink-mde, nord theme, e remix icons"
+      createdWith: "Creato con: ",
+      asWell: "E anche ink-mde, nord theme, e remix icons",
     },
     tags: {
       algebra: "#algebra",

@@ -1,124 +1,45 @@
 <script setup>
-import NotePreview from "./NotePreview.vue";
-import Sort from "./Sort.vue";
-import Filter from "./Filter.vue";
-import ClipLoader from "vue-spinner/src/ClipLoader.vue";
-import IconSearch from "@/components/icons/IconSearch.vue";
+import { useHomeStore } from "@/stores/home";
+
 import { url } from "@/assets/url.js";
-import axios from "axios";
-import { ref } from "vue";
+import { formatDate } from "@/services/formatDate.js";
+import NotePreview from "@/components/home/NotePreview.vue";
+import Sort from "@/components/home/Sort.vue";
+import Filter from "@/components/home/Filter.vue";
 
-const size = "4rem";
-let loading = ref(true);
-const color = "var(--accent)";
-var data = ref([]);
-var authors = ref([]);
-var showSearch = ref(false);
-var search = ref('');
+import IconSearch from "@/components/icons/IconSearch.vue";
 
-axios
-  .get(url + "readNotePreviews.php")
-  .then(function (response) {
-    data.value = response.data;
-    filters.filtered.value = data.value;
-    sortDate();
-  });
-  
-axios
-  .get(url + "readAuthors.php")
-  .then(function (response) {
-    loading.value = false;
-    authors.value = response.data;
-  });
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 
-function formatDate(dateString) {
-  let date = new Date(dateString + "Z");
-  return (
-    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
-  );
-}
-
-function sortDate() {
-  data.value.sort(function (a, b) {
-    return new Date(b.date) - new Date(a.date);
-  });
-  filters.filter();
-}
-
-function sortViews() {
-  data.value.sort((a, b) => b.views - a.views);
-  filters.filter();
-}
-
-function sortLikes() {
-  data.value.sort((a, b) => b.likes - a.likes);
-  filters.filter();
-}
-
-function rightFilter(type, value) {
-  if (type === 'tag') filters.tag = value.replace('tags.', '');
-  if (type === 'language') filters.language = value.replace('languages.', '');
-  if (type === 'author') filters.author = value;
-  filters.filter();
-}
-
-function reset(type) {
-  if (type === 'tag') filters.tag = null;
-  if (type === 'language') filters.language = null;
-  if (type === 'author') filters.author = null;
-  filters.filter();
-}
-
-function swapSearch() {
-  showSearch.value = !showSearch.value;
-  search.value = '';
-  filters.filter();
-}
-
-class Filters {
-  tag = null;
-  language = null;
-  author = null;
-  filtered = ref([]);
-  
-  filter() {
-    console.log(search.value);
-    let temp = data.value;
-    if (this.tag != null) {
-      temp = temp.filter(i => i.tag === this.tag);
-    }
-    if (this.language != null) {
-      temp = temp.filter(i => i.language === this.language);
-    }
-    if (this.author != null) {
-      temp = temp.filter(i => i.author === this.author);
-    }
-    if (search != null) {
-      temp = temp.filter(i => i.title.toLowerCase().includes(search.value.toLowerCase()));
-    }
-    this.filtered.value = temp;
-  }
-}
-
-var filters = new Filters();
-console.log(filters);
+const home = useHomeStore();
+home.getData();
 </script>
 
 <template>
-  <div class="notes-section" v-if="!loading">
+  <div class="notes-section" v-if="home.rawData.length && home.authors.length">
     <div class="order">
       <div class="first">
-        <sort @date="sortDate()" @views="sortViews()" @likes="sortLikes()"></sort>
-        <Filter @filter="rightFilter" @close="reset" :authors="authors"></Filter>
+        <Sort></Sort>
+        <Filter></Filter>
       </div>
       <div class="second">
-        <IconSearch @click="swapSearch()"></IconSearch>
-        <input v-if="showSearch" :placeholder="$t('home.search')" type="text" v-model="search" @input="filters.filter()">
+        <IconSearch @click="home.updateSearch()"></IconSearch>
+        <input
+          v-if="home.isShowSearch"
+          :placeholder="$t('home.search')"
+          type="text"
+          v-model="home.search"
+          @input="home.filter()"
+        />
       </div>
     </div>
     <div class="notes">
-      <div v-for="note in filters.filtered.value || []" :key="note['id']">
-        <note-preview @click="$router.push({name: 'Note', params: {id: note['id']}})" :tag="note['tag']" :id="note['id']">
+      <div v-for="note in home.displayData" :key="note['id']">
+        <NotePreview
+          @click="$router.push({ name: 'Note', params: { id: note['id'] } })"
+          :tag="note['tag']"
+          :id="note['id']"
+        >
           <template v-slot:title>
             {{ note["title"] }}
           </template>
@@ -128,17 +49,21 @@ console.log(filters);
           <template v-slot:date>
             {{ formatDate(note["date"]) }}
           </template>
-        </note-preview>
+        </NotePreview>
       </div>
     </div>
-    <div v-if="!filters.filtered.value.length" class="none">
+    <div v-if="!home.displayData.length" class="none">
       <h3>
-        {{ $t('home.nonotes') }}
+        {{ $t("home.nonotes") }}
       </h3>
     </div>
   </div>
-  <div class="loading" v-if="loading">
-    <clip-loader :loading="loading" :color="color" :size="size"></clip-loader>
+  <div class="loading" v-if="!home.rawData.length && !home.authors.length">
+    <ClipLoader
+      :loading="!home.rawData.length && !home.authors.length"
+      color="var(--accent)"
+      size="4em"
+    ></ClipLoader>
   </div>
 </template>
 
@@ -167,7 +92,7 @@ console.log(filters);
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: center; 
+  align-items: center;
 }
 
 .first {
@@ -179,12 +104,12 @@ console.log(filters);
 }
 
 .second:hover {
-  fill:var(--accent);
+  fill: var(--accent);
 }
 
 .second {
   display: flex;
-  fill:var(--text);
+  fill: var(--text);
   margin: 0rem 0.5rem;
 }
 

@@ -1,39 +1,36 @@
 <script setup>
+import { useHomeStore } from "@/stores/home";
+
 import IconSort from "@/components/icons/IconSort.vue";
 import IconDate from "@/components/icons/IconDate.vue";
 import IconLike from "@/components/icons/IconLike.vue";
 import IconView from "@/components/icons/IconView.vue";
 
-import { hideAllPoppers } from "floating-vue";
 import { ref } from "vue";
-let placeholder = ref("home.sort");
-const emit = defineEmits(["date", "likes", "views"]);
 
-var show = ref(false);
-
-function clicked(sort) {
-  show.value = false;
-  emit(sort);
-  placeholder.value = "home." + sort;
-  hideAllPoppers();
-}
+const home = useHomeStore();
 </script>
 
 <template>
   <div class="outer">
-    <button @click="show = !show">
+    <button
+      @click="
+        home.isShowSort = !home.isShowSort;
+        home.isShowFilter = false;
+      "
+    >
       <icon-sort></icon-sort>
-      {{ $t(placeholder) }}
+      {{ $t(home.sortPlaceholder) }}
     </button>
 
-    <div v-if="show" class="inner">
-      <button @click="clicked('date')">
+    <div v-if="home.isShowSort" class="inner">
+      <button @click="home.setSort('date')">
         <icon-date></icon-date>{{ $t("home.date") }}
       </button>
-      <button @click="clicked('likes')">
+      <button @click="home.setSort('likes')">
         <icon-like></icon-like>{{ $t("home.likes") }}
       </button>
-      <button @click="clicked('views')">
+      <button @click="home.setSort('views')">
         <icon-view></icon-view>{{ $t("home.views") }}
       </button>
     </div>
@@ -86,5 +83,4 @@ button:hover {
   z-index: 2;
   margin-top: 1rem;
 }
-
 </style>

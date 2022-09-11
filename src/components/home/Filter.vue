@@ -1,4 +1,6 @@
 <script setup>
+import { useHomeStore } from "@/stores/home";
+
 import IconTag from "@/components/icons/IconTag.vue";
 import IconAuthor from "@/components/icons/IconAuthor.vue";
 import IconLanguage from "@/components/icons/IconLanguage.vue";
@@ -9,121 +11,70 @@ import { tags, languages } from "@/assets/config.js";
 
 import { hideAllPoppers } from "floating-vue";
 import { ref } from "vue";
-let placeholder = ref("home.filter");
-const emit = defineEmits(["close", "filter"]);
 
-let showTag = ref(false);
-let showAuthor = ref(false);
-let showLanguage = ref(false);
-
-let selectedTag = ref("");
-let selectedLanguage = ref("");
-let selectedAuthor = ref("");
-
-var show = ref(false);
-
-const props = defineProps(['authors']);
-var authors = [];
-console.log(props.authors);
-props.authors.forEach((value) => {
-  authors.push(value.author);
-})
-
-function clicked(filter) {
-  show.value = false;
-  if (filter === "tag") showTag.value = true;
-  if (filter === "language") showLanguage.value = true;
-  if (filter === "author") showAuthor.value = true;
-
-  hideAllPoppers();
-}
-
-function filterTag(value) {
-  selectedTag.value = value;
-  emit("filter", "tag", selectedTag.value);
-}
-
-function clearTagFilter() {
-  selectedTag.value = "";
-  emit("close", 'tag');
-}
-
-function filterLanguage(value) {
-  selectedLanguage.value = value;
-  emit("filter", "language", selectedLanguage.value);
-}
-
-function clearLanguageFilter() {
-  selectedLanguage.value = "";
-  emit("close", 'language');
-}
-
-function filterAuthor(value) {
-  selectedAuthor.value = value;
-  emit("filter", "author", selectedAuthor.value);
-}
-
-function clearAuthorFilter() {
-  selectedAuthor.value = "";
-  emit("close", 'author');
-}
+const home = useHomeStore();
 </script>
 
 <template>
   <div class="outer">
-      <button @click="show = !show">
-        <icon-filter></icon-filter>
-        {{ $t("home.filter") }}
+    <button
+      @click="
+        home.isShowFilter = !home.isShowFilter;
+        home.isShowSort = false;
+      "
+    >
+      <icon-filter></icon-filter>
+      {{ $t("home.filter") }}
+    </button>
+
+    <div v-if="home.isShowFilter" class="inner">
+      <button
+        @click="
+          home.isTag = true;
+          home.isShowFilter = false;
+        "
+      >
+        <icon-tag></icon-tag>{{ $t("home.tag") }}
       </button>
+      <button
+        @click="
+          home.isAuthor = true;
+          home.isShowFilter = false;
+        "
+      >
+        <icon-author></icon-author>{{ $t("home.author") }}
+      </button>
+      <button
+        @click="
+          home.isLanguage = true;
+          home.isShowFilter = false;
+        "
+      >
+        <icon-language></icon-language>{{ $t("home.language") }}
+      </button>
+    </div>
 
-      <div v-if="show" class="inner">
-        <button @click="clicked('tag')">
-          <icon-tag></icon-tag>{{ $t("home.tag") }}
-        </button>
-        <button @click="clicked('author')">
-          <icon-author></icon-author>{{ $t("home.author") }}
-        </button>
-        <button @click="clicked('language')">
-          <icon-language></icon-language>{{ $t("home.language") }}
-        </button>
-      </div>
-
-    <filter-modal
-      v-if="showTag"
-      filter="tag"
-      :options="tags"
-      @close="showTag = false"
-      @filter="filterTag"
-    ></filter-modal>
-    <filter-modal
-      v-if="showLanguage"
-      filter="language"
-      :options="languages"
-      @close="showLanguage = false"
-      @filter="filterLanguage"
-    ></filter-modal>
-    <filter-modal
-      v-if="showAuthor"
-      filter="author"
-      :options="authors"
-      @close="showAuthor = false"
-      @filter="filterAuthor"
-    ></filter-modal>
+    <filter-modal v-if="home.isTag" filter="tag"></filter-modal>
+    <filter-modal v-if="home.isLanguage" filter="language"></filter-modal>
+    <filter-modal v-if="home.isAuthor" filter="author"></filter-modal>
   </div>
-  <div class="chip" v-if="selectedTag != ''">
+
+  <div class="chip" v-if="home.filters.tag">
     <IconTag></IconTag>
-    {{ $t(selectedTag) }}
-    <IconClose class="close" @click="clearTagFilter()"></IconClose>
+    {{ $t("tags." + home.filters.tag) }}
+    <IconClose class="close" @click="home.resetFilter('tag')"></IconClose>
   </div>
-  <div class="chip" v-if="selectedLanguage != ''">
+
+  <div class="chip" v-if="home.filters.language">
     <IconLanguage></IconLanguage>
-    {{ $t(selectedLanguage) }}
-    <IconClose class="close" @click="clearLanguageFilter()"></IconClose>
+    {{ $t("languages." + home.filters.language) }}
+    <IconClose class="close" @click="home.resetFilter('language')"></IconClose>
   </div>
-  <div class="chip" v-if="selectedAuthor != ''">
+
+  <div class="chip" v-if="home.filters.author">
     <IconAuthor></IconAuthor>
-    {{ $t(selectedAuthor) }}
-    <IconClose class="close" @click="clearAuthorFilter()"></IconClose>
+    {{ home.filters.author }}
+    <IconClose class="close" @click="home.resetFilter('author')"></IconClose>
   </div>
 </template>
 
@@ -186,7 +137,6 @@ button:hover {
   z-index: 2;
   margin-top: 1rem;
 }
-
 
 .close:hover {
   fill: var(--accent);

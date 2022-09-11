@@ -1,8 +1,5 @@
 <script setup>
-const props = defineProps({
-  tag: String,
-  id: Number,
-});
+const props = defineProps(["tag", "id"]);
 
 const image = "/tagImages/" + props.tag + ".jpg";
 </script>

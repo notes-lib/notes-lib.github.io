@@ -1,26 +1,28 @@
 /* based on nord theme */
 @import url(//fonts.googleapis.com/css?family=Inter);
 
-* { margin: 0; padding: 0; }
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
 
 body.dark-theme {
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
-    --background: #242933;
-    --surface: #2e3440;
-    --accent: #88c0d0;
-    --text: #eceff4;
-    background-color: var(--background);
-    color: var(--text);
+  --background: #242933;
+  --surface: #2e3440;
+  --accent: #88c0d0;
+  --text: #eceff4;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
 }
 
 body.light-theme {
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
-    --background: #e5e9f0;
-    --surface: #d8dee9;
-    --accent: #88c0d0;
-    --text: #4c566a;
-    background-color: var(--background);
-    color: var(--text);
+  --background: #e5e9f0;
+  --surface: #d8dee9;
+  --accent: #88c0d0;
+  --text: #4c566a;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
 }

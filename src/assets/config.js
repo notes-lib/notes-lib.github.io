@@ -22,4 +22,13 @@ export const tags = [
   "other",
 ];
 
-export const languages = ["ENG", "ITA", "FRA", "DEU", "RUS", "ESP", "ARB", "ZHO"];
+export const languages = [
+  "ENG",
+  "ITA",
+  "FRA",
+  "DEU",
+  "RUS",
+  "ESP",
+  "ARB",
+  "ZHO",
+];
