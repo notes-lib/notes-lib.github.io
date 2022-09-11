@@ -111,7 +111,7 @@ const modals = useModalsStore();
 
 <style scoped>
 .modal {
-  z-index: 2;
+  z-index: 3;
   position: fixed;
   background-color: var(--background);
   max-width: 30rem;
@@ -170,6 +170,7 @@ h3.top {
   background-color: #000000a1;
   align-items: center;
   align-content: center;
+  overflow: hidden;
 }
 
 svg.click:hover {
