@@ -23,7 +23,7 @@ function emitResponse(e) {
     <div class="modal">
       <h3>
         {{ $t("home.choosetag")
-        }}<icon-close @click="emit('close')"></icon-close>
+        }}<icon-close @click="newNote.isTag = false"></icon-close>
       </h3>
       <div class="tag">
         <button
