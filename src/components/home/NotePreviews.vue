@@ -34,20 +34,20 @@ home.getData();
       </div>
     </div>
     <div class="notes">
-      <div v-for="note in home.displayData" :key="note['id']">
+      <div v-for="note in home.displayData" :key="note.id">
         <NotePreview
-          @click="$router.push({ name: 'Note', params: { id: note['id'] } })"
-          :tag="note['tag']"
-          :id="note['id']"
+          @click="$router.push({ name: 'Note', params: { id: note.id } })"
+          :tag="note.tag"
+          :id="note.id"
         >
           <template v-slot:title>
-            {{ note["title"] }}
+            {{ note.title }}
           </template>
           <template v-slot:author>
-            {{ note["author"] }}
+            {{ note.author === 'anon' ? $t('note.anon') : note.author }}
           </template>
           <template v-slot:date>
-            {{ formatDate(note["date"]) }}
+            {{ formatDate(note.date) }}
           </template>
         </NotePreview>
       </div>
