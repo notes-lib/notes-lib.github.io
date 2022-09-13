@@ -23,6 +23,7 @@ const image = "/tagImages/" + props.tag + ".jpg";
   border-radius: 10px;
   flex-direction: row;
   display: flex;
+  cursor: pointer;
 }
 
 img {
