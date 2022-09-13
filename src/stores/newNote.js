@@ -51,7 +51,6 @@ export const useNewNoteStore = defineStore("newNote", () => {
 
   function clearAll() {
     title.value = "";
-    author.value = "";
     tag.value = "";
     language.value = "";
     content.value = "";
