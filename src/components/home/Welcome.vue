@@ -53,13 +53,10 @@ const modals = useModalsStore();
   fill: var(--accent);
 }
 
-.align {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  column-gap: 0.3rem;
-  margin-top: -0.5rem;
+.align svg {
+  margin-bottom: 0.2rem;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 h1 {
