@@ -191,6 +191,12 @@ function moveUp() {
   display: none;
 }
 
+:deep(blockquote) {
+  border-left: 5px solid var(--surface);
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
 .menu :deep(.table-of-contents) {
   margin-top: 1rem;
   background-color: var(--surface);
