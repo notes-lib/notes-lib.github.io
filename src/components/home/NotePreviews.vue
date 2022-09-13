@@ -103,7 +103,7 @@ home.getData();
   gap: 0.5rem;
 }
 
-.second:hover {
+.second svg:hover {
   fill: var(--accent);
 }
 
