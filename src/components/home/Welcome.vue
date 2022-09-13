@@ -51,6 +51,7 @@ const modals = useModalsStore();
   color: var(--accent);
   text-decoration: underline;
   fill: var(--accent);
+  cursor: pointer;
 }
 
 .align svg {
