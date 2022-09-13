@@ -1,4 +1,6 @@
 <script setup>
+import WarningModal from "@/components/generic/WarningModal.vue";
+
 import IconAuthor from "@/components/icons/IconAuthor.vue";
 import IconSubmit from "@/components/icons/IconSubmit.vue";
 
@@ -6,6 +8,7 @@ import { ref } from "vue";
 
 let author = ref(localStorage.getItem("author") ?? "");
 let content = ref("");
+let warningMessage = ref("");
 
 import axios from "axios";
 import { useRoute } from "vue-router";
@@ -18,6 +21,12 @@ const route = useRoute();
 const emit = defineEmits(["newComment"]);
 
 function submit() {
+  if (content.value.length < 1) return;
+
+  if (content.value.length > 2000) warningMessage.value = "note.maxComment";
+
+  if (author.value === "") author.value = "anon";
+
   axios
     .post(
       url + "createComment.php",
@@ -47,6 +56,7 @@ function submit() {
 </script>
 
 <template>
+  <WarningModal @close="warningMessage = ''" v-if="warningMessage != ''">{{$t(warningMessage)}}</WarningModal>
   <div class="outer">
     <div class="top">
       <div class="author">

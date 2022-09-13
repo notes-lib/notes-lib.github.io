@@ -1,3 +1,14 @@
+<script setup>
+import { useModalsStore } from "@/stores/modals.js";
+
+import IconAdd from "@/components/icons/IconAdd.vue";
+
+import { RouterLink } from "vue-router";
+
+const modals = useModalsStore();
+</script>
+
+
 <template>
   <h1>
     {{ $t("home.welcome") }}
@@ -17,15 +28,39 @@
         {{ $t("home.q2") }}
       </h3>
       <br />
-      <p>
-        {{ $t("home.a2") }}
-      </p>
+      <i18n-t
+        keypath="home.a2"
+        tag="p"
+        for="home.a2"
+        class="align"
+      >
+        <span
+          @click="modals.indications = true"
+          class="link"
+        >{{$t("home.indications")}}</span>
+        <RouterLink class="link" to="/newNote"><IconAdd></IconAdd></RouterLink>
+      </i18n-t>
     </div>
   </div>
 </template>
 
 <style scoped>
 @import url(//fonts.googleapis.com/css?family=Rubik);
+
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  fill: var(--accent);
+}
+
+.align {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  column-gap: 0.3rem;
+  margin-top: -0.5rem;
+}
 
 h1 {
   margin: 2rem 1rem;
