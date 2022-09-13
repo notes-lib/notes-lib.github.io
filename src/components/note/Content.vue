@@ -201,12 +201,15 @@ function moveUp() {
   margin-top: 1rem;
   background-color: var(--surface);
   border-radius: 10px;
-  padding: 1rem;
   display: block;
 }
 
 .menu :deep(.table-of-contents a) {
   text-decoration: none;
   color: var(--text);
+}
+
+.menu :deep(.table-of-contents ol) {
+    padding: 1rem;
 }
 </style>
