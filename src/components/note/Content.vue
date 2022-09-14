@@ -126,6 +126,11 @@ function moveUp() {
   font-size: 18px;
 }
 
+:deep(strong) {
+  font-weight: 900;
+	text-shadow: 0.5px 0px 0px var(--text);
+}
+
 :deep(a) {
   color: var(--accent);
 }

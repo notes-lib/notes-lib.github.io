@@ -61,11 +61,13 @@ function submit() {
     <div class="top">
       <div class="author">
         <IconAuthor></IconAuthor>
-        <input
-          v-model="author"
-          type="text"
-          :placeholder="$t('note.username')"
-        />
+        <div class="input">
+          <input
+            v-model="author"
+            type="text"
+            :placeholder="$t('note.username')"
+          />
+        </div>
       </div>
       <div class="submit" @click="submit()">
         <button>
@@ -101,12 +103,14 @@ function submit() {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap-reverse;
+  gap: 1rem;
 }
 
 .author {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-shrink: 1;
 }
 
 button {
@@ -136,6 +140,14 @@ input {
   border: none;
   outline: none;
   font-size: 17px;
+  width: 100%;
+  box-sizing:border-box;
+}
+
+.input {
+  flex-shrink: 1;
+  flex-basis: 5rem;
+  flex-grow: 1;
   display: block;
 }
 

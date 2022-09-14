@@ -217,6 +217,8 @@ export const messages = {
       new: "Aggiungi",
       anon: "Anonimo",
       maxComment: "Lunghezza massima per le fonti sono 5000 caratteri",
+      username: "Nome utente",
+      content: "Commento",
     },
     indications: {
       indications: "Indicazioni",

@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useSettingsStore = defineStore("settings", () => {
   //check if theme already set, light default
-  const theme = ref(localStorage.getItem("theme") ?? "light-theme");
+  const theme = ref(readTheme());
   const language = ref("");
 
   function updateTheme() {
@@ -28,6 +28,14 @@ export const useSettingsStore = defineStore("settings", () => {
     localStorage.setItem("language", language.value);
 
     //update modal
+  }
+
+  function readTheme () {
+    let local = localStorage.getItem("theme");
+    if (local != null) return local;
+
+    const browser = window.matchMedia("(prefers-color-scheme: dark)");
+    if (browser.matches) return "dark-theme"; else return "light-theme";
   }
 
   return { theme, language, updateTheme, updateLanguage };
