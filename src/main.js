@@ -8,8 +8,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
 import { createHead } from "@vueuse/head";
-import VueYandexMetrika from 'vue-yandex-metrika'                               
-
+import VueYandexMetrika from 'vue3-yandex-metrika';
+                             
 //initially see if localstorage has it
 let language = localStorage.getItem("language");
 

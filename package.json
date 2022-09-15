@@ -23,8 +23,10 @@
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.2",
     "vue-spinner": "^1.0.4",
+    "vue-y-metrika": "^0.0.2",
     "vue-yandex-metrika": "^1.8.3",
-    "vue3-markdown-it": "^1.0.10"
+    "vue3-markdown-it": "^1.0.10",
+    "vue3-yandex-metrika": "^0.0.3"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
