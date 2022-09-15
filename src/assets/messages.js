@@ -57,6 +57,7 @@ export const messages = {
       removeContent: "Maximum length for entry is 30000 characters",
       removeSources: "Maximum length for sources is 10000 characters",
       wentWrong: "Something went wrong",
+      markdownExplainer: "https://www.markdownguide.org/cheat-sheet/"
     },
     note: {
       like: "Like",
@@ -197,6 +198,7 @@ export const messages = {
       removeContent: "Lunghezza massima per un articolo sono 30000 caratteri",
       removeSources: "Lunghezza massima per le fonti sono 10000 caratteri",
       wentWrong: "Qualcosa è andato storto",
+      markdownExplainer: "https://notes-lib.github.io/#/note/25"
     },
     note: {
       like: "Like",

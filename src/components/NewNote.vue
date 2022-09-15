@@ -142,7 +142,7 @@ setInterval(() => newNote.setAll(), 3000);
                 for="newNote.contentExplain1"
               >
                 <a
-                  href="https://www.markdownguide.org/cheat-sheet/"
+                  :href="$t('newNote.markdownExplainer')"
                   target="_blank"
                   >markdown</a
                 >
