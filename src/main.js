@@ -8,6 +8,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
 import { createHead } from "@vueuse/head";
+import VueYandexMetrika from 'vue-yandex-metrika'                               
 
 //initially see if localstorage has it
 let language = localStorage.getItem("language");
@@ -33,5 +34,11 @@ app.use(createPinia());
 app.use(router);
 app.use(t);
 app.use(head);
+
+app.use(VueYandexMetrika, {
+  id: 90217674,
+  router: router,
+  env: process.env.NODE_ENV
+})
 
 app.mount("#app");

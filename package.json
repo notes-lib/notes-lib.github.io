@@ -23,6 +23,7 @@
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.2",
     "vue-spinner": "^1.0.4",
+    "vue-yandex-metrika": "^1.8.3",
     "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
