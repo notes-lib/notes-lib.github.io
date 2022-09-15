@@ -2,6 +2,7 @@
 import { useModalsStore } from "@/stores/modals.js";
 
 import IconAdd from "@/components/icons/IconAdd.vue";
+import IconInstagram from "@/components/icons/IconInstagram.vue";
 
 import { RouterLink } from "vue-router";
 
@@ -21,6 +22,7 @@ const modals = useModalsStore();
       <br />
       <p>
         {{ $t("home.a1") }}
+        <a target="_blank" href="https://www.instagram.com/notes_library_official/"><IconInstagram></IconInstagram> Instagram</a>
       </p>
     </div>
     <div class="question">
@@ -89,5 +91,20 @@ hr {
   background-color: var(--surface);
   padding: 40px;
   border-radius: 10px;
+}
+
+a {
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  fill: var(--accent);
+  display: inline;
+  align-content: center;
+}
+
+a svg {
+  margin-bottom: 0.2rem;
+  vertical-align: middle;
+  display: inline-block;
 }
 </style>
