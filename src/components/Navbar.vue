@@ -25,7 +25,10 @@ const modals = useModalsStore();
     <div class="width">
       <RouterLink class="start" to="/">
         <IconBookMark></IconBookMark>
-        <p>Notes Library</p>
+        <div class="title">
+          <h4>Notes Library</h4>
+          <p>Beta</p>
+        </div>
       </RouterLink>
       <div class="end">
         <IconContrast @click="settings.updateTheme()"></IconContrast>
@@ -48,6 +51,17 @@ const modals = useModalsStore();
 <style scoped>
 nav {
   background-color: var(--surface);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.title p {
+  font-size: 12px;
+  color: var(--accent);
 }
 
 .width {
