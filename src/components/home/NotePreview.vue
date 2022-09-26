@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["tag", "id"]);
 
-const image = "/tagImages/" + props.tag + ".jpg";
+const image = "/tagImages/" + props.tag + ".webp";
 </script>
 
 <template>

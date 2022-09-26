@@ -11,4 +11,3 @@
     />
   </svg>
 </template>
-view

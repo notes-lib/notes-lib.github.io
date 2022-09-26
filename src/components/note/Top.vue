@@ -26,7 +26,7 @@ const props = defineProps([
 
 const emit = defineEmits(["toggleMenu", "scrollComments"]);
 
-const image = "/tagImages/" + props.tag + ".jpg";
+const image = "/tagImages/" + props.tag + ".webp";
 
 function formatDate(dateString) {
   let date = new Date(dateString + "Z");

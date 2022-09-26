@@ -114,6 +114,10 @@ nav {
 }
 
 @media (max-width: 500px) {
+  h4 {
+    display: none;
+  }
+
   p {
     display: none;
   }
