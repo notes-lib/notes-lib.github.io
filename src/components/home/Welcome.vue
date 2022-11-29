@@ -14,6 +14,11 @@ const modals = useModalsStore();
   <h1>
     {{ $t("home.welcome") }}
   </h1>
+  <div class="splash">
+    <div class="effects">
+      {{ $t("home.splash") }}
+    </div>
+  </div>
   <div class="q-container">
     <div class="question">
       <h3>
@@ -49,6 +54,63 @@ const modals = useModalsStore();
 <style scoped>
 @import url(//fonts.googleapis.com/css?family=Rubik);
 
+.splash {
+  display: flex;
+  justify-content: end;
+  height: 0px;
+  margin-right: 2rem;
+}
+
+.effects {
+  display: inline-block;
+  font-weight: bold;
+  color: var(--accent);
+  animation: splash 3s linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes splash {
+  0% {
+    -webkit-transform: scale(1) rotate(-20deg);
+    -moz-transform: scale(1) rotate(-20deg);
+    -o-transform: scale(1) rotate(-20deg);
+    transform: scale(1) rotate(-20deg);
+    color: #88c0d0;
+  }
+
+  25% {
+    -webkit-transform: scale(1.2) rotate(-20deg);
+    -moz-transform: scale(1.2) rotate(-20deg);
+    -o-transform: scale(1.2) rotate(-20deg) ;
+    transform: scale(1.2) rotate(-20deg);
+    color: #81a1c1
+  }
+
+  50% {
+    -webkit-transform: scale(1) rotate(-20deg);
+    -moz-transform: scale(1) rotate(-20deg);
+    -o-transform: scale(1) rotate(-20deg);
+    transform: scale(1) rotate(-20deg);
+    color: #5e81ac;
+  }
+
+  75% {
+    -webkit-transform: scale(1.2) rotate(-20deg);
+    -moz-transform: scale(1.2) rotate(-20deg);
+    -o-transform: scale(1.2) rotate(-20deg) ;
+    transform: scale(1.2) rotate(-20deg);
+    color: #81a1c1
+  }
+
+  100% {
+    -webkit-transform: scale(1) rotate(-20deg);
+    -moz-transform: scale(1) rotate(-20deg);
+    -o-transform: scale(1) rotate(-20deg);
+    transform: scale(1) rotate(-20deg);
+    color: #88c0d0;
+  }
+}
+
 .link {
   color: var(--accent);
   text-decoration: underline;
@@ -68,6 +130,7 @@ h1 {
   text-align: center;
   font-weight: 900;
   letter-spacing: 1px;
+  margin-bottom: 1rem;
 }
 
 hr {

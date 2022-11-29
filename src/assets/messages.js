@@ -21,6 +21,7 @@ export const messages = {
       chooselanguage: "Choose language",
       nonotes: "No notes found, try changing the filters",
       search: "Search",
+      splash: "Over 50k words",
     },
     newNote: {
       contribute: "Contribute an entry",
@@ -158,6 +159,7 @@ export const messages = {
       chooselanguage: "Scegli lingua",
       nonotes: "Nessun appunto trovato, provate a cambiare i filtri",
       search: "Cerca",
+      splash: "Oltre 50k parole",
     },
     newNote: {
       contribute: "Contribuisci un articolo",
