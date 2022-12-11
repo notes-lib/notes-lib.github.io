@@ -1,3 +1,15 @@
+## 6.1.2 (2022-10-13)
+
+### Bug fixes
+
+Fix a bug that caused deletion commands on non-empty ranges to incorrectly return false and do nothing, causing the editor to fall back to native behavior.
+
+## 6.1.1 (2022-09-28)
+
+### Bug fixes
+
+Make sure the selection endpoints are moved out of atomic ranges when applying a deletion command to a non-empty selection.
+
 ## 6.1.0 (2022-08-18)
 
 ### Bug fixes

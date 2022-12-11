@@ -28,35 +28,35 @@ The line comment syntax is taken from the
 [`commentTokens`](https://codemirror.net/6/docs/ref/#commands.CommentTokens) [language
 data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
 */
-const toggleLineComment = /*@__PURE__*/command(changeLineComment, 0 /* Toggle */);
+const toggleLineComment = /*@__PURE__*/command(changeLineComment, 0 /* CommentOption.Toggle */);
 /**
 Comment the current selection using line comments.
 */
-const lineComment = /*@__PURE__*/command(changeLineComment, 1 /* Comment */);
+const lineComment = /*@__PURE__*/command(changeLineComment, 1 /* CommentOption.Comment */);
 /**
 Uncomment the current selection using line comments.
 */
-const lineUncomment = /*@__PURE__*/command(changeLineComment, 2 /* Uncomment */);
+const lineUncomment = /*@__PURE__*/command(changeLineComment, 2 /* CommentOption.Uncomment */);
 /**
 Comment or uncomment the current selection using block comments.
 The block comment syntax is taken from the
 [`commentTokens`](https://codemirror.net/6/docs/ref/#commands.CommentTokens) [language
 data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
 */
-const toggleBlockComment = /*@__PURE__*/command(changeBlockComment, 0 /* Toggle */);
+const toggleBlockComment = /*@__PURE__*/command(changeBlockComment, 0 /* CommentOption.Toggle */);
 /**
 Comment the current selection using block comments.
 */
-const blockComment = /*@__PURE__*/command(changeBlockComment, 1 /* Comment */);
+const blockComment = /*@__PURE__*/command(changeBlockComment, 1 /* CommentOption.Comment */);
 /**
 Uncomment the current selection using block comments.
 */
-const blockUncomment = /*@__PURE__*/command(changeBlockComment, 2 /* Uncomment */);
+const blockUncomment = /*@__PURE__*/command(changeBlockComment, 2 /* CommentOption.Uncomment */);
 /**
 Comment or uncomment the lines around the current selection using
 block comments.
 */
-const toggleBlockCommentByLine = /*@__PURE__*/command((o, s) => changeBlockComment(o, s, selectedLineRanges(s)), 0 /* Toggle */);
+const toggleBlockCommentByLine = /*@__PURE__*/command((o, s) => changeBlockComment(o, s, selectedLineRanges(s)), 0 /* CommentOption.Toggle */);
 function getConfig(state, pos = state.selection.main.head) {
     let data = state.languageDataAt("commentTokens", pos);
     return data.length ? data[0] : {};
@@ -115,14 +115,14 @@ function changeBlockComment(option, state, ranges = state.selection.ranges) {
     if (!tokens.every(c => c))
         return null;
     let comments = ranges.map((r, i) => findBlockComment(state, tokens[i], r.from, r.to));
-    if (option != 2 /* Uncomment */ && !comments.every(c => c)) {
+    if (option != 2 /* CommentOption.Uncomment */ && !comments.every(c => c)) {
         return { changes: state.changes(ranges.map((range, i) => {
                 if (comments[i])
                     return [];
                 return [{ from: range.from, insert: tokens[i].open + " " }, { from: range.to, insert: " " + tokens[i].close }];
             })) };
     }
-    else if (option != 1 /* Comment */ && comments.some(c => c)) {
+    else if (option != 1 /* CommentOption.Comment */ && comments.some(c => c)) {
         let changes = [];
         for (let i = 0, comment; i < comments.length; i++)
             if (comment = comments[i]) {
@@ -162,7 +162,7 @@ function changeLineComment(option, state, ranges = state.selection.ranges) {
         if (lines.length == startI + 1)
             lines[startI].single = true;
     }
-    if (option != 2 /* Uncomment */ && lines.some(l => l.comment < 0 && (!l.empty || l.single))) {
+    if (option != 2 /* CommentOption.Uncomment */ && lines.some(l => l.comment < 0 && (!l.empty || l.single))) {
         let changes = [];
         for (let { line, token, indent, empty, single } of lines)
             if (single || !empty)
@@ -170,7 +170,7 @@ function changeLineComment(option, state, ranges = state.selection.ranges) {
         let changeSet = state.changes(changes);
         return { changes: changeSet, selection: state.selection.map(changeSet, 1) };
     }
-    else if (option != 1 /* Comment */ && lines.some(l => l.comment >= 0)) {
+    else if (option != 1 /* CommentOption.Comment */ && lines.some(l => l.comment >= 0)) {
         let changes = [];
         for (let { line, comment, token } of lines)
             if (comment >= 0) {
@@ -224,12 +224,12 @@ const historyField_ = /*@__PURE__*/StateField.define({
         if (fromHist) {
             let selection = tr.docChanged ? EditorSelection.single(changeEnd(tr.changes)) : undefined;
             let item = HistEvent.fromTransaction(tr, selection), from = fromHist.side;
-            let other = from == 0 /* Done */ ? state.undone : state.done;
+            let other = from == 0 /* BranchName.Done */ ? state.undone : state.done;
             if (item)
                 other = updateBranch(other, other.length, config.minDepth, item);
             else
                 other = addSelection(other, tr.startState.selection);
-            return new HistoryState(from == 0 /* Done */ ? fromHist.rest : other, from == 0 /* Done */ ? other : fromHist.rest);
+            return new HistoryState(from == 0 /* BranchName.Done */ ? fromHist.rest : other, from == 0 /* BranchName.Done */ ? other : fromHist.rest);
         }
         let isolate = tr.annotation(isolateHistory);
         if (isolate == "full" || isolate == "before")
@@ -297,37 +297,37 @@ function cmd(side, selection) {
 Undo a single group of history events. Returns false if no group
 was available.
 */
-const undo = /*@__PURE__*/cmd(0 /* Done */, false);
+const undo = /*@__PURE__*/cmd(0 /* BranchName.Done */, false);
 /**
 Redo a group of history events. Returns false if no group was
 available.
 */
-const redo = /*@__PURE__*/cmd(1 /* Undone */, false);
+const redo = /*@__PURE__*/cmd(1 /* BranchName.Undone */, false);
 /**
 Undo a change or selection change.
 */
-const undoSelection = /*@__PURE__*/cmd(0 /* Done */, true);
+const undoSelection = /*@__PURE__*/cmd(0 /* BranchName.Done */, true);
 /**
 Redo a change or selection change.
 */
-const redoSelection = /*@__PURE__*/cmd(1 /* Undone */, true);
+const redoSelection = /*@__PURE__*/cmd(1 /* BranchName.Undone */, true);
 function depth(side) {
     return function (state) {
         let histState = state.field(historyField_, false);
         if (!histState)
             return 0;
-        let branch = side == 0 /* Done */ ? histState.done : histState.undone;
+        let branch = side == 0 /* BranchName.Done */ ? histState.done : histState.undone;
         return branch.length - (branch.length && !branch[0].changes ? 1 : 0);
     };
 }
 /**
 The amount of undoable change events available in a given state.
 */
-const undoDepth = /*@__PURE__*/depth(0 /* Done */);
+const undoDepth = /*@__PURE__*/depth(0 /* BranchName.Done */);
 /**
 The amount of redoable change events available in a given state.
 */
-const redoDepth = /*@__PURE__*/depth(1 /* Undone */);
+const redoDepth = /*@__PURE__*/depth(1 /* BranchName.Undone */);
 // History events store groups of changes or effects that need to be
 // undone/redone together.
 class HistEvent {
@@ -505,7 +505,7 @@ class HistoryState {
         return new HistoryState(addMappingToBranch(this.done, mapping), addMappingToBranch(this.undone, mapping), this.prevTime, this.prevUserEvent);
     }
     pop(side, state, selection) {
-        let branch = side == 0 /* Done */ ? this.done : this.undone;
+        let branch = side == 0 /* BranchName.Done */ ? this.done : this.undone;
         if (branch.length == 0)
             return null;
         let event = branch[branch.length - 1];
@@ -513,7 +513,7 @@ class HistoryState {
             return state.update({
                 selection: event.selectionsAfter[event.selectionsAfter.length - 1],
                 annotations: fromHistory.of({ side, rest: popSelection(branch) }),
-                userEvent: side == 0 /* Done */ ? "select.undo" : "select.redo",
+                userEvent: side == 0 /* BranchName.Done */ ? "select.undo" : "select.redo",
                 scrollIntoView: true
             });
         }
@@ -530,7 +530,7 @@ class HistoryState {
                 effects: event.effects,
                 annotations: fromHistory.of({ side, rest }),
                 filter: false,
-                userEvent: side == 0 /* Done */ ? "undo" : "redo",
+                userEvent: side == 0 /* BranchName.Done */ ? "undo" : "redo",
                 scrollIntoView: true
             });
         }
@@ -997,26 +997,34 @@ const simplifySelection = ({ state, dispatch }) => {
     dispatch(setSel(state, selection));
     return true;
 };
-function deleteBy({ state, dispatch }, by) {
-    if (state.readOnly)
+function deleteBy(target, by) {
+    if (target.state.readOnly)
         return false;
-    let event = "delete.selection";
+    let event = "delete.selection", { state } = target;
     let changes = state.changeByRange(range => {
         let { from, to } = range;
         if (from == to) {
             let towards = by(from);
-            if (towards < from)
+            if (towards < from) {
                 event = "delete.backward";
-            else if (towards > from)
+                towards = skipAtomic(target, towards, false);
+            }
+            else if (towards > from) {
                 event = "delete.forward";
+                towards = skipAtomic(target, towards, true);
+            }
             from = Math.min(from, towards);
             to = Math.max(to, towards);
+        }
+        else {
+            from = skipAtomic(target, from, false);
+            to = skipAtomic(target, to, true);
         }
         return from == to ? { range } : { changes: { from, to }, range: EditorSelection.cursor(from) };
     });
     if (changes.changes.empty)
         return false;
-    dispatch(state.update(changes, {
+    target.dispatch(state.update(changes, {
         scrollIntoView: true,
         userEvent: event,
         effects: event == "delete.selection" ? EditorView.announce.of(state.phrase("Selection deleted")) : undefined
@@ -1048,7 +1056,7 @@ const deleteByChar = (target, forward) => deleteBy(target, pos => {
         if (targetPos == pos && line.number != (forward ? state.doc.lines : 1))
             targetPos += forward ? 1 : -1;
     }
-    return skipAtomic(target, targetPos, forward);
+    return targetPos;
 });
 /**
 Delete the selection, or, for cursor selections, the character
@@ -1077,7 +1085,7 @@ const deleteByGroup = (target, forward) => deleteBy(target, start => {
             cat = nextCat;
         pos = next;
     }
-    return skipAtomic(target, pos, forward);
+    return pos;
 });
 /**
 Delete the selection or backward until the end of the next
@@ -1096,7 +1104,7 @@ line, delete the line break after it.
 */
 const deleteToLineEnd = view => deleteBy(view, pos => {
     let lineEnd = view.lineBlockAt(pos).to;
-    return skipAtomic(view, pos < lineEnd ? lineEnd : Math.min(view.state.doc.length, pos + 1), true);
+    return pos < lineEnd ? lineEnd : Math.min(view.state.doc.length, pos + 1);
 });
 /**
 Delete the selection, or, if it is a cursor selection, delete to
@@ -1105,7 +1113,7 @@ line, delete the line break before it.
 */
 const deleteToLineStart = view => deleteBy(view, pos => {
     let lineStart = view.lineBlockAt(pos).from;
-    return skipAtomic(view, pos > lineStart ? lineStart : Math.max(0, pos - 1), false);
+    return pos > lineStart ? lineStart : Math.max(0, pos - 1);
 });
 /**
 Delete all whitespace directly before a line end from the

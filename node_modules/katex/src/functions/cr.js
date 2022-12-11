@@ -4,44 +4,30 @@
 import defineFunction from "../defineFunction";
 import buildCommon from "../buildCommon";
 import mathMLTree from "../mathMLTree";
-import {calculateSize} from "../units";
-import ParseError from "../ParseError";
+import {calculateSize, makeEm} from "../units";
 import {assertNodeType} from "../parseNode";
 
-// \\ is a macro mapping to either \cr or \newline.  Because they have the
-// same signature, we implement them as one megafunction, with newRow
-// indicating whether we're in the \cr case, and newLine indicating whether
-// to break the line in the \newline case.
-
+// \DeclareRobustCommand\\{...\@xnewline}
 defineFunction({
     type: "cr",
-    names: ["\\cr", "\\newline"],
+    names: ["\\\\"],
     props: {
         numArgs: 0,
-        numOptionalArgs: 1,
-        argTypes: ["size"],
+        numOptionalArgs: 0,
         allowedInText: true,
     },
 
-    handler({parser, funcName}, args, optArgs) {
-        const size = optArgs[0];
-        const newRow = (funcName === "\\cr");
-        let newLine = false;
-        if (!newRow) {
-            if (parser.settings.displayMode &&
-                parser.settings.useStrictBehavior(
-                    "newLineInDisplayMode", "In LaTeX, \\\\ or \\newline " +
-                    "does nothing in display mode")) {
-                newLine = false;
-            } else {
-                newLine = true;
-            }
-        }
+    handler({parser}, args, optArgs) {
+        const size = parser.gullet.future().text === "[" ?
+            parser.parseSizeGroup(true) : null;
+        const newLine = !parser.settings.displayMode ||
+            !parser.settings.useStrictBehavior(
+                "newLineInDisplayMode", "In LaTeX, \\\\ or \\newline " +
+                "does nothing in display mode");
         return {
             type: "cr",
             mode: parser.mode,
             newLine,
-            newRow,
             size: size && assertNodeType(size, "size").value,
         };
     },
@@ -50,16 +36,12 @@ defineFunction({
     // not within tabular/array environments.
 
     htmlBuilder(group, options) {
-        if (group.newRow) {
-            throw new ParseError(
-                "\\cr valid only within a tabular/array environment");
-        }
         const span = buildCommon.makeSpan(["mspace"], [], options);
         if (group.newLine) {
             span.classes.push("newline");
             if (group.size) {
                 span.style.marginTop =
-                    calculateSize(group.size, options) + "em";
+                    makeEm(calculateSize(group.size, options));
             }
         }
         return span;
@@ -71,7 +53,7 @@ defineFunction({
             node.setAttribute("linebreak", "newline");
             if (group.size) {
                 node.setAttribute("height",
-                    calculateSize(group.size, options) + "em");
+                    makeEm(calculateSize(group.size, options)));
             }
         }
         return node;

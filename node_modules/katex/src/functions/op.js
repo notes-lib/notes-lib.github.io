@@ -8,6 +8,7 @@ import utils from "../utils";
 import Style from "../Style";
 import {assembleSupSub} from "./utils/assembleSupSub";
 import {assertNodeType} from "../parseNode";
+import {makeEm} from "../units";
 
 import * as html from "../buildHTML";
 import * as mml from "../buildMathML";
@@ -60,8 +61,7 @@ export const htmlBuilder: HtmlBuilderSupSub<"op"> = (grp, options) => {
         if (group.name === "\\oiint" || group.name === "\\oiiint") {
             // No font glyphs yet, so use a glyph w/o the oval.
             // TODO: When font glyphs are available, delete this code.
-            stash = group.name.substr(1);
-            // $FlowFixMe
+            stash = group.name.slice(1);
             group.name = stash === "oiint" ? "\\iint" : "\\iiint";
         }
 
@@ -82,7 +82,6 @@ export const htmlBuilder: HtmlBuilderSupSub<"op"> = (grp, options) => {
                     {type: "elem", elem: oval, shift: large ? 0.08 : 0},
                 ],
             }, options);
-            // $FlowFixMe
             group.name = "\\" + stash;
             base.classes.unshift("mop");
             // $FlowFixMe
@@ -95,14 +94,11 @@ export const htmlBuilder: HtmlBuilderSupSub<"op"> = (grp, options) => {
             base = inner[0];
             base.classes[0] = "mop"; // replace old mclass
         } else {
-            base = buildCommon.makeSpan(
-                ["mop"], buildCommon.tryCombineChars(inner), options);
+            base = buildCommon.makeSpan(["mop"], inner, options);
         }
     } else {
         // Otherwise, this is a text operator. Build the text from the
         // operator's name.
-        // TODO(emily): Add a space in the middle of some of these
-        // operators, like \limsup
         const output = [];
         for (let i = 1; i < group.name.length; i++) {
             output.push(buildCommon.mathsym(group.name[i], group.mode, options));
@@ -137,7 +133,7 @@ export const htmlBuilder: HtmlBuilderSupSub<"op"> = (grp, options) => {
     } else {
         if (baseShift) {
             base.style.position = "relative";
-            base.style.top = baseShift + "em";
+            base.style.top = makeEm(baseShift);
         }
 
         return base;
@@ -168,7 +164,7 @@ const mathmlBuilder: MathMLBuilder<"op"> = (group, options) => {
         const operator = new mathMLTree.MathNode("mo",
             [mml.makeText("\u2061", "text")]);
         if (group.parentIsSupSub) {
-            node = new mathMLTree.MathNode("mo", [node, operator]);
+            node = new mathMLTree.MathNode("mrow", [node, operator]);
         } else {
             node = mathMLTree.newDocumentFragment([node, operator]);
         }
@@ -229,6 +225,7 @@ defineFunction({
     names: ["\\mathop"],
     props: {
         numArgs: 1,
+        primitive: true,
     },
     handler: ({parser}, args) => {
         const body = args[0];

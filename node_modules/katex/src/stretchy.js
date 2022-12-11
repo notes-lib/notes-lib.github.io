@@ -9,6 +9,7 @@ import {LineNode, PathNode, SvgNode} from "./domTree";
 import buildCommon from "./buildCommon";
 import mathMLTree from "./mathMLTree";
 import utils from "./utils";
+import {makeEm} from "./units";
 
 import type Options from "./Options";
 import type {ParseNode, AnyParseNode} from "./parseNode";
@@ -54,11 +55,16 @@ const stretchyCodePoint: {[string]: string} = {
     xrightleftarrows: "\u21c4",
     xrightequilibrium: "\u21cc",  // Not a perfect match.
     xleftequilibrium: "\u21cb",   // None better available.
+    "\\cdrightarrow": "\u2192",
+    "\\cdleftarrow": "\u2190",
+    "\\cdlongequal": "=",
 };
 
 const mathMLnode = function(label: string): mathMLTree.MathNode {
     const node = new mathMLTree.MathNode(
-        "mo", [new mathMLTree.TextNode(stretchyCodePoint[label.substr(1)])]);
+        "mo",
+        [new mathMLTree.TextNode(stretchyCodePoint[label.replace(/^\\/, '')])],
+    );
     node.setAttribute("stretchy", "true");
     return node;
 };
@@ -118,7 +124,9 @@ const katexImagesData: {
     underrightarrow: [["rightarrow"], 0.888, 522, "xMaxYMin"],
     underleftarrow: [["leftarrow"], 0.888, 522, "xMinYMin"],
     xrightarrow: [["rightarrow"], 1.469, 522, "xMaxYMin"],
+    "\\cdrightarrow": [["rightarrow"], 3.0, 522, "xMaxYMin"], // CD minwwidth2.5pc
     xleftarrow: [["leftarrow"], 1.469, 522, "xMinYMin"],
+    "\\cdleftarrow": [["leftarrow"], 3.0, 522, "xMinYMin"],
     Overrightarrow: [["doublerightarrow"], 0.888, 560, "xMaxYMin"],
     xRightarrow: [["doublerightarrow"], 1.526, 560, "xMaxYMin"],
     xLeftarrow: [["doubleleftarrow"], 1.526, 560, "xMinYMin"],
@@ -129,6 +137,7 @@ const katexImagesData: {
     xrightharpoonup: [["rightharpoon"], 0.888, 522, "xMaxYMin"],
     xrightharpoondown: [["rightharpoondown"], 0.888, 522, "xMaxYMin"],
     xlongequal: [["longequal"], 0.888, 334, "xMinYMin"],
+    "\\cdlongequal": [["longequal"], 3.0, 334, "xMinYMin"],
     xtwoheadleftarrow: [["twoheadleftarrow"], 0.888, 334, "xMinYMin"],
     xtwoheadrightarrow: [["twoheadrightarrow"], 0.888, 334, "xMaxYMin"],
 
@@ -182,7 +191,7 @@ const svgSpan = function(
         height: number,
     } {
         let viewBoxWidth = 400000;  // default
-        const label = group.label.substr(1);
+        const label = group.label.slice(1);
         if (utils.contains(["widehat", "widecheck", "widetilde", "utilde"],
             label)) {
             // Each type in the `if` statement corresponds to one of the ParseNode
@@ -225,7 +234,7 @@ const svgSpan = function(
             const path = new PathNode(pathName);
             const svgNode = new SvgNode([path], {
                 "width": "100%",
-                "height": height + "em",
+                "height": makeEm(height),
                 "viewBox": `0 0 ${viewBoxWidth} ${viewBoxHeight}`,
                 "preserveAspectRatio": "none",
             });
@@ -266,7 +275,7 @@ const svgSpan = function(
 
                 const svgNode = new SvgNode([path], {
                     "width": "400em",
-                    "height": height + "em",
+                    "height": makeEm(height),
                     "viewBox": `0 0 ${viewBoxWidth} ${viewBoxHeight}`,
                     "preserveAspectRatio": aligns[i] + " slice",
                 });
@@ -276,7 +285,7 @@ const svgSpan = function(
                 if (numSvgChildren === 1) {
                     return {span, minWidth, height};
                 } else {
-                    span.style.height = height + "em";
+                    span.style.height = makeEm(height);
                     spans.push(span);
                 }
             }
@@ -293,9 +302,9 @@ const svgSpan = function(
     // Note that we are returning span.depth = 0.
     // Any adjustments relative to the baseline must be done in buildHTML.
     span.height = height;
-    span.style.height = height + "em";
+    span.style.height = makeEm(height);
     if (minWidth > 0) {
-        span.style.minWidth = minWidth + "em";
+        span.style.minWidth = makeEm(minWidth);
     }
 
     return span;
@@ -304,14 +313,15 @@ const svgSpan = function(
 const encloseSpan = function(
     inner: HtmlDomNode,
     label: string,
-    pad: number,
+    topPad: number,
+    bottomPad: number,
     options: Options,
 ): DomSpan | SvgSpan {
-    // Return an image span for \cancel, \bcancel, \xcancel, or \fbox
+    // Return an image span for \cancel, \bcancel, \xcancel, \fbox, or \angl
     let img;
-    const totalHeight = inner.height + inner.depth + 2 * pad;
+    const totalHeight = inner.height + inner.depth + topPad + bottomPad;
 
-    if (/fbox|color/.test(label)) {
+    if (/fbox|color|angl/.test(label)) {
         img = buildCommon.makeSpan(["stretchy", label], [], options);
 
         if (label === "fbox") {
@@ -349,14 +359,14 @@ const encloseSpan = function(
 
         const svgNode = new SvgNode(lines, {
             "width": "100%",
-            "height": totalHeight + "em",
+            "height": makeEm(totalHeight),
         });
 
         img = buildCommon.makeSvgSpan([], [svgNode], options);
     }
 
     img.height = totalHeight;
-    img.style.height = totalHeight + "em";
+    img.style.height = makeEm(totalHeight);
 
     return img;
 };

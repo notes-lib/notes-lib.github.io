@@ -119,7 +119,10 @@ export function toRaw<T>(observed: T): T {
 export function markRaw<T extends object>(
   value: T
 ): T & { [RawSymbol]?: true } {
-  def(value, ReactiveFlags.SKIP, true)
+  // non-extensible objects won't be observed anyway
+  if (Object.isExtensible(value)) {
+    def(value, ReactiveFlags.SKIP, true)
+  }
   return value
 }
 

@@ -57,6 +57,12 @@ function createReadonly(target: any, shallow: boolean) {
     return target as any
   }
 
+  if (__DEV__ && !Object.isExtensible(target)) {
+    warn(
+      `Vue 2 does not support creating readonly proxy for non-extensible object.`
+    )
+  }
+
   // already a readonly object
   if (isReadonly(target)) {
     return target as any

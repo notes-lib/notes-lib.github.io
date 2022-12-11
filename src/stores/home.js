@@ -46,8 +46,12 @@ export const useHomeStore = defineStore("home", () => {
         rawData.value = response[0].data;
 
         //we can't actually use raw data as occurences are also fetched
-        authors.value = [];
-        response[1].data.forEach((value) => authors.value.push(value.author));
+        try {
+          authors.value = [];
+          response[1].data.forEach((value) => authors.value.push(value.author));
+        } catch (e) {
+          console.log(e);
+        }
 
         sort();
       })

@@ -731,7 +731,7 @@ export interface SVGAttributes extends AriaAttributes, EventHandlers<Events> {
    * @see https://www.w3.org/TR/SVG/styling.html#ElementSpecificStyling
    */
   class?: any
-  style?: string | CSSProperties
+  style?: StyleValue
 
   color?: string
   height?: Numberish
@@ -1297,7 +1297,9 @@ export interface Events {
 }
 
 type EventHandlers<E> = {
-  [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
+  [K in keyof E]?: E[K] extends (...args: any) => any
+    ? E[K]
+    : (payload: E[K]) => void
 }
 
 type ReservedProps = {

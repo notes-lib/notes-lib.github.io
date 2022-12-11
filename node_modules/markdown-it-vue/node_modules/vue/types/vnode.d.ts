@@ -1,5 +1,8 @@
+import { StyleValue } from './jsx'
 import { Vue } from './vue'
 import { DirectiveFunction, DirectiveOptions } from './options'
+import { Ref } from './v3-generated'
+import { ComponentPublicInstance } from './v3-component-public-instance'
 
 /**
  * For extending allowed non-declared props on components in TSX
@@ -65,17 +68,25 @@ export interface VNodeComponentOptions {
   tag?: string
 }
 
+export type VNodeRef =
+  | string
+  | Ref
+  | ((
+      ref: Element | ComponentPublicInstance | null,
+      refs: Record<string, any>
+    ) => void)
+
 export interface VNodeData {
   key?: string | number
   slot?: string
   scopedSlots?: { [key: string]: ScopedSlot | undefined }
-  ref?: string
+  ref?: VNodeRef
   refInFor?: boolean
   tag?: string
   staticClass?: string
   class?: any
   staticStyle?: { [key: string]: any }
-  style?: string | object[] | object
+  style?: StyleValue
   props?: { [key: string]: any }
   attrs?: { [key: string]: any }
   domProps?: { [key: string]: any }
