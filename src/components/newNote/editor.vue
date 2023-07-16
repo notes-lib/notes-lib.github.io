@@ -37,7 +37,10 @@ const options = {
     spellcheck: true,
     toolbar: true,
   },
-  plugins: [],
+  katex: true,
+  plugins: [
+    katex(),
+  ],
   selections: [],
   toolbar: {
     bold: true,
