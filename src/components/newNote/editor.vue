@@ -38,9 +38,6 @@ const options = {
     toolbar: true,
   },
   katex: true,
-  plugins: [
-    katex(),
-  ],
   selections: [],
   toolbar: {
     bold: true,
