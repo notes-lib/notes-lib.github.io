@@ -20,17 +20,17 @@ const options = {
   files: {
     clipboard: false,
     dragAndDrop: false,
-    handler: () => {},
+    handler: () => { },
     injectMarkup: true,
     types: ["image/*"],
   },
   hooks: {
-    afterUpdate: () => {},
-    beforeUpdate: () => {},
+    afterUpdate: () => { },
+    beforeUpdate: () => { },
   },
   interface: {
     //appearance: InkValues.Appearance.Auto,
-    attribution: false,
+    attribution: true,
     autocomplete: true,
     images: true,
     readonly: false,
@@ -62,24 +62,15 @@ const options = {
     <div class="top" @click="close()">
       <IconCheck></IconCheck>
     </div>
-    <Ink
-      v-if="props.storageKey === 'addContent'"
-      class="editor"
-      v-model="newNote.content"
-      :options="options"
-    />
-    <Ink
-      v-else
-      class="editor"
-      v-model="newNote.sources"
-      :options="options"
-    />
+    <Ink v-if="props.storageKey === 'addContent'" class="editor" v-model="newNote.content" :options="options" />
+    <Ink v-else class="editor" v-model="newNote.sources" :options="options" />
   </div>
 </template>
 
 <style scoped>
 @import url(//fonts.googleapis.com/css?family=Inter);
 @import url(//fonts.googleapis.com/css?family=Source+Code+Pro);
+@import 'https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css';
 
 .main {
   background-color: var(--background);
