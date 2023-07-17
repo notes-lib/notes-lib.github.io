@@ -13,7 +13,7 @@
     "@vueuse/head": "^0.7.9",
     "axios": "^0.27.2",
     "floating-vue": "^2.0.0-beta.19",
-    "ink-mde": "^0.25.1-dev.1",
+    "ink-mde": "^0.26.0",
     "markdown-it-image-caption": "^1.0.0",
     "markdown-it-katex-external": "^1.0.0",
     "markdown-it-texmath": "^1.0.0",
