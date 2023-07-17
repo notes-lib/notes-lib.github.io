@@ -18,8 +18,8 @@ function close() {
 const options = {
   doc: "",
   files: {
-    clipboard: false,
-    dragAndDrop: false,
+    clipboard: true,
+    dragAndDrop: true,
     handler: () => { },
     injectMarkup: true,
     types: ["image/*"],
