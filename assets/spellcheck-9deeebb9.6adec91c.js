@@ -1,1 +1,0 @@
-import{E as t}from"./index.dd94ef6b.js";import"https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js";const r=()=>t.contentAttributes.of({spellcheck:"true"});export{r as spellcheck};

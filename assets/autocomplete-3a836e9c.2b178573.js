@@ -1,0 +1,1 @@
+import{u as e,Q as s,a,c as i,U as p}from"./index.6e96315a.js";import"https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js";const l=o=>{const[c,t]=e(s(p.completion,o));return[a({defaultKeymap:!0,icons:!1,override:t,optionClass:()=>"ink-tooltip-option"}),i()]};export{l as autocomplete};
