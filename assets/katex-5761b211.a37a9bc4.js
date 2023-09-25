@@ -1,1 +1,0 @@
-import{a1 as o}from"./index.6e96315a.js";import"https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js";const i=async()=>{const{default:t}=await o(()=>import("./katex.c4a8e5d8.js").then(r=>r.k),["./katex.c4a8e5d8.js","./index.6e96315a.js","./index.2012fadb.css"],import.meta.url);return t};export{i as importer};
